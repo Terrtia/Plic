@@ -20,6 +20,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     public void ajouter(ArbreAbstrait a) {
         expr = a ;
+        this.arbre.add(a);
     }
     
     public String toString() {
