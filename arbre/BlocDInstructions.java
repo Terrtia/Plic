@@ -10,17 +10,17 @@ import java.util.ArrayList;
 
 public class BlocDInstructions extends ArbreAbstrait {
     
-	protected ArrayList<ArbreAbstrait> arbre;
+	//protected ArrayList<ArbreAbstrait> arbre;
     protected ArbreAbstrait expr ;
     
     public BlocDInstructions() {
         super();
-		this.arbre = new ArrayList<>();
+		//this.arbre = new ArrayList<>();
     }
     
     public void ajouter(ArbreAbstrait a) {
         expr = a ;
-        this.arbre.add(a);
+        //this.arbre.add(a);
     }
     
     public String toString() {
@@ -30,10 +30,11 @@ public class BlocDInstructions extends ArbreAbstrait {
     @Override
 	public String toMips() {
     	String codeMips = "";
-		for(ArbreAbstrait a: arbre) {
+		/*for(ArbreAbstrait a: arbre) {
 			codeMips = codeMips + a.toMips();
 		}
-		return codeMips;
+		return codeMips;*/
+    	return this.expr.toMips();
 	}
 
 }

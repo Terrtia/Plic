@@ -15,7 +15,25 @@ public abstract class BinaireArithmetique extends Binaire {
     public String toMips() {
     	StringBuilder s = new StringBuilder();
     	
-    	s.append("");
+    	//Left Expression
+    	if(this.gauche.estConstante()) {
+    		s.append(this.gauche.toMips());
+    		
+    		//Right Expression
+    		if(this.droite.estConstante()) {
+    			s.append(this.droite.toMips());
+    		} else if(this.droite.estBoolean()) {
+    			System.err.println("Expected: integer, found: boolean");
+    		} else {
+    			s.append(this.droite.toMips());
+    		}
+    		
+    	} else if(this.gauche.estBoolean()) {
+    		System.err.println("Expected: integer, found: boolean");
+    	} else {
+    		s.append(this.gauche.toMips());
+    	}
+    	
     	return s.toString();
     }
     
