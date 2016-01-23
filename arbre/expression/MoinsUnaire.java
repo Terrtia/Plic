@@ -21,4 +21,9 @@ public class MoinsUnaire extends Unaire {
 		return null;
 	}
 
+	@Override
+	public boolean verify() {
+		return estEntier();
+	}
+
 }

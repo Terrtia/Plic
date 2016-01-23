@@ -23,5 +23,10 @@ public class Moins extends BinaireArithmetique {
 		sb.append(gauche.toMips());
 		return null;
 	}
+
+	@Override
+	public boolean verify() {
+		return false;
+	}
     
 }

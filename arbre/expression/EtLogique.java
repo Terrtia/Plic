@@ -17,9 +17,22 @@ public class EtLogique extends BinaireLogique {
         return " et " ;
     }
 
-	@Override
-	public String toMips() {
-		return null;
+    public String toMips() {
+		StringBuilder sb = new StringBuilder();
+		if(this.verify()){
+			sb.append(gauche.toMips());
+			sb.append(droite.toMips());
+			//operation et
+			//sb.append();
+		}else{
+			System.err.println("Exected the same type");
+		}
+		return sb.toString();
 	}
+    
+    public boolean verify(){
+    	return gauche.estBoolean() && droite.estBoolean() && droite.verify() && gauche.verify();
+    }
+	
 
 }

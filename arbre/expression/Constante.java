@@ -22,6 +22,10 @@ public abstract class Constante extends Expression {
     public String toString() {
         return cste ;
     }
+    
+    public boolean verify(){
+    	return true;
+    }
 
   
 }

@@ -19,7 +19,16 @@ public class Egal extends Comparaison {
 
 	@Override
 	public String toMips() {
-		return null;
+		StringBuilder sb = new StringBuilder();
+		if(this.verify()){
+			sb.append(gauche.toMips());
+			sb.append(droite.toMips());
+			//operation d'egalité
+			//sb.append();
+		}else{
+			System.err.println("Exected the same type");
+		}
+		return sb.toString();
 	}
     
 }
