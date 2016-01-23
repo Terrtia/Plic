@@ -12,4 +12,11 @@ public abstract class BinaireArithmetique extends Binaire {
         super(gauche, droite) ;
     }
     
+    public String toMips() {
+    	StringBuilder s = new StringBuilder();
+    	
+    	s.append("");
+    	return s.toString();
+    }
+    
 }

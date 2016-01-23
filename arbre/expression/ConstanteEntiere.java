@@ -12,6 +12,10 @@ public class ConstanteEntiere extends Constante {
         super(texte) ;
     }
 
+    protected boolean estConstante() {
+    	return true;
+    }
+    
 	public String toMips() {
 		return null;
 	}
