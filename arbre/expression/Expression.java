@@ -14,8 +14,13 @@ public abstract class Expression extends ArbreAbstrait {
         super() ;
     }
     
-    public boolean estConstante(){
+
+    protected boolean estConstante() {
     	return false;
-    	}
+    }
+    
+    protected boolean estBoolean() {
+    	return false;
+    }
 
 }

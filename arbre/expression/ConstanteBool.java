@@ -12,6 +12,10 @@ public class ConstanteBool extends Constante {
         super(texte) ;
     }
 
+    protected boolean estBoolean() {
+    	return true;
+    }
+    
 	public String toMips() {
 		return null;
 	}

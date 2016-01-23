@@ -12,21 +12,30 @@ public abstract class BinaireArithmetique extends Binaire {
         super(gauche, droite) ;
     }
     
-    public String toMips(){
-    	StringBuilder sb = new StringBuilder();
-    	//premier cas ex : 1*2
-    	if(gauche.estConstante() && droite.estConstante()){
-    		
-    	//deuxieme cas ex : a-8
-    	}else if(!gauche.estConstante() && droite.estConstante()){
-    		
+
+    public String toMips() {
+    	StringBuilder s = new StringBuilder();
     	
-    	//dernier cas ex : b/a
-    	}else{
+    	//Left Expression
+    	if(this.gauche.estConstante()) {
+    		s.append(this.gauche.toMips());
     		
+    		//Right Expression
+    		if(this.droite.estConstante()) {
+    			s.append(this.droite.toMips());
+    		} else if(this.droite.estBoolean()) {
+    			System.err.println("Expected: integer, found: boolean");
+    		} else {
+    			s.append(this.droite.toMips());
+    		}
+    		
+    	} else if(this.gauche.estBoolean()) {
+    		System.err.println("Expected: integer, found: boolean");
+    	} else {
+    		s.append(this.gauche.toMips());
     	}
     	
-    	return sb.toString();
+    	return s.toString();
     }
-  
+    
 }
