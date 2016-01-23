@@ -14,5 +14,8 @@ public abstract class Expression extends ArbreAbstrait {
         super() ;
     }
     
+    public boolean estConstante(){
+    	return false;
+    	}
 
 }

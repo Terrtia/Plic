@@ -14,9 +14,14 @@ public abstract class Constante extends Expression {
         cste = texte ;
     }
 
+    public boolean estConstante(){
+    	return true;
+    }
+    
     @Override
     public String toString() {
         return cste ;
     }
 
+  
 }

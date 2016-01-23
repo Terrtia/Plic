@@ -19,6 +19,8 @@ public class Moins extends BinaireArithmetique {
 
 	@Override
 	public String toMips() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(gauche.toMips());
 		return null;
 	}
     
