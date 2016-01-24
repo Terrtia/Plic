@@ -34,10 +34,5 @@ public class Moins extends BinaireArithmetique {
 		s.append("addi $sp, $sp, -4");
 		return s.toString();
 	}
-
-	@Override
-	public boolean verify() {
-		return false;
-	}
     
 }
