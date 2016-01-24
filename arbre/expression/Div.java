@@ -19,7 +19,7 @@ public class Div extends BinaireArithmetique {
 
 	@Override
 	public String toMips() {
-		StringBuilder s = new StringBuilder();
+		StringBuilder s = toMipsBinaireArithmetique();
 		//Right
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $t8, ($sp)\n");

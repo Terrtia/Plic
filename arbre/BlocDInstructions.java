@@ -29,8 +29,8 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
 	public String toMips() {
-    	String codeMips = "";
-		/*for(ArbreAbstrait a: arbre) {
+    	/*String codeMips = "";
+		for(ArbreAbstrait a: arbre) {
 			codeMips = codeMips + a.toMips();
 		}
 		return codeMips;*/

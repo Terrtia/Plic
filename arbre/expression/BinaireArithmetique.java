@@ -12,7 +12,7 @@ public abstract class BinaireArithmetique extends Binaire {
         super(gauche, droite) ;
     }
     
-    public String toMips() {
+    public StringBuilder toMipsBinaireArithmetique() {
     	StringBuilder s = new StringBuilder();
     	
     	//Left Expression
@@ -34,7 +34,7 @@ public abstract class BinaireArithmetique extends Binaire {
     		s.append(this.gauche.toMips());
     	}
     	
-    	return s.toString();
+    	return s;
     }
     
 }
