@@ -12,4 +12,7 @@ public abstract class BinaireLogique extends Binaire {
         super(gauche, droite) ;
     }
     
+  
+    
+    
 }

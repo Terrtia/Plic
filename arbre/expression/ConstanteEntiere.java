@@ -12,7 +12,7 @@ public class ConstanteEntiere extends Constante {
         super(texte) ;
     }
 
-    protected boolean estConstante() {
+    public boolean estEntier() {
     	return true;
     }
     

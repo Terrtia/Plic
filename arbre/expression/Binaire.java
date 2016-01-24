@@ -23,5 +23,9 @@ public abstract class Binaire extends Expression {
     public String toString() {
         return "(" + gauche + operateur() + droite + ")" ;
     }
+    
+    public boolean verify(){
+    	return (gauche.estBoolean() ==droite.estBoolean()) && gauche.verify() && droite.verify();
+    }
 
 }

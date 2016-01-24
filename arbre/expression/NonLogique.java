@@ -21,4 +21,9 @@ public class NonLogique extends Unaire {
 		return null;
 	}
 
+	@Override
+	public boolean verify() {
+		return estBoolean();
+	}
+
 }

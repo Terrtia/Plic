@@ -14,6 +14,7 @@ public abstract class Expression extends ArbreAbstrait {
         super() ;
     }
     
+
     protected boolean estConstante() {
     	return false;
     }
@@ -21,5 +22,11 @@ public abstract class Expression extends ArbreAbstrait {
     protected boolean estBoolean() {
     	return false;
     }
+    
+    protected boolean estEntier(){
+    	return false;
+    }
+    
+    public abstract boolean verify();
 
 }

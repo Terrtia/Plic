@@ -12,15 +12,16 @@ public abstract class BinaireArithmetique extends Binaire {
         super(gauche, droite) ;
     }
     
+    
     public StringBuilder toMipsBinaireArithmetique() {
     	StringBuilder s = new StringBuilder();
     	
     	//Left Expression
-    	if(this.gauche.estConstante()) {
+    	if(this.gauche.estEntier()) {
     		s.append(this.gauche.toMips());
     		
     		//Right Expression
-    		if(this.droite.estConstante()) {
+    		if(this.droite.estEntier()) {
     			s.append(this.droite.toMips());
     		} else if(this.droite.estBoolean()) {
     			System.err.println("Expected: integer, found: boolean");

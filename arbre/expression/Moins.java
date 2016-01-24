@@ -20,6 +20,7 @@ public class Moins extends BinaireArithmetique {
 	@Override
 	public String toMips() {
 		StringBuilder s = toMipsBinaireArithmetique();
+
 		//Right
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $t8, ($sp)\n");
@@ -32,6 +33,11 @@ public class Moins extends BinaireArithmetique {
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4");
 		return s.toString();
+	}
+
+	@Override
+	public boolean verify() {
+		return false;
 	}
     
 }
