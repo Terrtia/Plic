@@ -30,7 +30,7 @@ public class Plus extends BinaireArithmetique {
 		
 		s.append("add $v0, $v0, $t8\n");
 		s.append("sw $v0, ($sp)\n");
-		s.append("addi $sp, $sp, -4");
+		s.append("addi $sp, $sp, -4\n");
 		return s.toString();
 	}
 

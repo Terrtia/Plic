@@ -18,7 +18,13 @@ public class NonLogique extends Unaire {
     }
 
 	public String toMips() {
-		return null;
+		StringBuilder s = toMipsUnaire();
+		s.append("add $sp, $sp, 4\n");
+		s.append("lw $v0, ($sp)\n");
+		s.append("not $v0, $v0\n");
+		s.append("sw $v0, ($sp)\n");
+		s.append("addi $sp, $sp, -4\n");
+		return s.toString();
 	}
 
 	@Override
