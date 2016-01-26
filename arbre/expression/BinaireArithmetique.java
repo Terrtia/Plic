@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.exceptions.AnalyseSyntaxiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -7,33 +9,34 @@ package plic.arbre.expression;
  */
 
 public abstract class BinaireArithmetique extends Binaire {
+	
+	private boolean estEntier;
 
     protected BinaireArithmetique(Expression gauche, Expression droite) {
-        super(gauche, droite) ;
-    }
-    
+        super(gauche, droite);
+        this.estEntier = false;
+    }  
     
     public StringBuilder toMipsBinaireArithmetique() {
     	StringBuilder s = new StringBuilder();
-    	/*
-    	//Left Expression
-    	if(this.gauche.estEntier()) {
-    		s.append(this.gauche.toMips());
-    		
-    		//Right Expression
-    		if(this.droite.estEntier()) {
-    			s.append(this.droite.toMips());
-    		} else if(this.droite.estBoolean()) {
-    			System.err.println("Expected: integer, found: boolean");
+    	System.out.print(gauche.estEntier());
+    	System.out.print(droite.estEntier());
+    	System.out.print("\n");
+    	System.out.print(gauche.verify());
+    	System.out.print(droite.verify());
+    	System.out.print("\n");
+    	System.out.print("\n");
+    	
+    	if(!this.verify()) {
+    		if(gauche.estBoolean()){
+    			throw new AnalyseSyntaxiqueException("ligne 1, Left Operand found: boolean, expected: Integer\n");
+    		} else if(droite.estBoolean()) {
+    			throw new AnalyseSyntaxiqueException("ligne 1, Right Operand found: booleean, expected: Integer\n");
     		} else {
-    			s.append(this.droite.toMips());
+    			throw new AnalyseSyntaxiqueException("ligne 1, ERROR 0x54A551E54\n");
     		}
-    		
-    	} else if(this.gauche.estBoolean()) {
-    		System.err.println("Expected: integer, found: boolean");
-    	} else {
-    		s.append(this.gauche.toMips());
-    	}*/
+    
+    	}
     	s.append(this.gauche.toMips());
     	s.append(this.droite.toMips());
     	return s;
