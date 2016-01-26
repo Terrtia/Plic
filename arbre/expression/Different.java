@@ -19,6 +19,7 @@ public class Different extends Comparaison {
 
     public String toMips() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("# Different\n");
 		if(this.verify()){
 			sb.append(gauche.toMips());
 			sb.append(droite.toMips());

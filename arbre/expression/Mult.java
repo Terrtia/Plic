@@ -20,6 +20,7 @@ public class Mult extends BinaireArithmetique {
 	@Override
 	public String toMips() {
 		StringBuilder s = toMipsBinaireArithmetique();
+		s.append("# Mult\n");
 		//Right
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $t8, ($sp)\n");

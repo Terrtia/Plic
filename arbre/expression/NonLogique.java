@@ -19,6 +19,7 @@ public class NonLogique extends Unaire {
 
 	public String toMips() {
 		StringBuilder s = toMipsUnaire();
+		s.append("# NonLogique\n");
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $v0, ($sp)\n");
 		s.append("not $v0, $v0\n");

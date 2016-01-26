@@ -1,0 +1,10 @@
+erreurs :
+
+(4 + 2) + 2 = 6
+mais 4 + (2 + 2) = 8 fonctionne
+pb avec l'opérateur guache de l'addition ?
+
+(4 - 3) - 2 = -1
+((4 - 3) - 2) = -1
+même pb
+
