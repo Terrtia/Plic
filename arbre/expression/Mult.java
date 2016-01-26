@@ -32,7 +32,7 @@ public class Mult extends BinaireArithmetique {
 		s.append("mult $v0, $t8\n");
 		s.append("mflo $v0\n");
 		s.append("sw $v0, ($sp)\n");
-		s.append("addi $sp, $sp, -4");
+		s.append("addi $sp, $sp, -4\n");
 		return s.toString();
 	}
 

@@ -25,7 +25,7 @@ public abstract class Binaire extends Expression {
     }
     
     public boolean verify(){
-    	return (gauche.estBoolean() ==droite.estBoolean()) && gauche.verify() && droite.verify();
+    	return (gauche.estBoolean() == droite.estBoolean()) && gauche.verify() && droite.verify();
     }
 
 }
