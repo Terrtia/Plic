@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.exceptions.AnalyseSyntaxiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -19,10 +21,13 @@ public class NonLogique extends Unaire {
 
 	public String toMips() {
 		StringBuilder s = toMipsUnaire();
+		if(!verify()) 
+			throw new AnalyseSyntaxiqueException("booleen requis apres un non logique\n");
 		s.append("# NonLogique\n");
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $v0, ($sp)\n");
 		s.append("not $v0, $v0\n");
+		s.append("addi $v0, $v0, 2\n");
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4\n");
 		return s.toString();
@@ -30,7 +35,7 @@ public class NonLogique extends Unaire {
 
 	@Override
 	public boolean verify() {
-		return estBoolean();
+		return expression.estBoolean();
 	}
 
 }

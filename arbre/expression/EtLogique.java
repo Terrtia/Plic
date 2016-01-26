@@ -32,7 +32,7 @@ public class EtLogique extends BinaireLogique {
 			
 			sb.append("and $v0, $v0, $t8\n");
 			sb.append("sw $v0, ($sp)\n");
-			sb.append("addi $sp, $sp, -4");
+			sb.append("addi $sp, $sp, -4\n");
 		}else{
 			System.err.println("Exected the same type");
 		}

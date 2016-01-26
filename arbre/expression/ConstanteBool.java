@@ -18,7 +18,10 @@ public class ConstanteBool extends Constante {
     
 	public String toMips() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("li $v0, " + this.cste + "\n");
+		if(this.cste.equals("vrai"))
+			sb.append("li $v0, 1\n");
+		else
+			sb.append("li $v0, 0\n");
 		sb.append("sw $v0, ($sp)\n");
 		sb.append("addi $sp, $sp, -4\n");
 		sb.append("\n");
