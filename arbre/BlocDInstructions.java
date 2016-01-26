@@ -35,7 +35,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     public String fin() {
     	StringBuilder s = new StringBuilder();
-    	s.append("end :\n");
+    	s.append("\nend :\n");
     	s.append("  move $v1, $v0\n");
     	s.append("  li $v0, 10\n");
     	s.append("  syscall\n");
