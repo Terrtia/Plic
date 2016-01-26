@@ -32,6 +32,7 @@ public class Moins extends BinaireArithmetique {
 		s.append("sub $v0, $v0, $t8\n");
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4\n");
+		s.append("\n");
 		return s.toString();
 	}
     

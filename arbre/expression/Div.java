@@ -33,6 +33,7 @@ public class Div extends BinaireArithmetique {
 		s.append("mflo $v0\n");
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4\n");
+		s.append("\n");
 		return s.toString();
 	}
     
