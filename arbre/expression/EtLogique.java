@@ -19,6 +19,7 @@ public class EtLogique extends BinaireLogique {
 
     public String toMips() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("# EtLogique\n");
 		if(this.verify()){
 			sb.append(gauche.toMips());
 			sb.append(droite.toMips());

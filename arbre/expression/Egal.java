@@ -20,6 +20,7 @@ public class Egal extends Comparaison {
 	@Override
 	public String toMips() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("# Egal\n");
 		if(this.verify()){
 			sb.append(gauche.toMips());
 			sb.append(droite.toMips());

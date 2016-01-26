@@ -19,6 +19,7 @@ public class Superieur extends Comparaison {
 
     public String toMips() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("# Superieur\n");
 		if(this.verify()){
 			sb.append(gauche.toMips());
 			sb.append(droite.toMips());

@@ -15,7 +15,7 @@ public abstract class BinaireArithmetique extends Binaire {
     
     public StringBuilder toMipsBinaireArithmetique() {
     	StringBuilder s = new StringBuilder();
-    	
+    	/*
     	//Left Expression
     	if(this.gauche.estEntier()) {
     		s.append(this.gauche.toMips());
@@ -33,8 +33,9 @@ public abstract class BinaireArithmetique extends Binaire {
     		System.err.println("Expected: integer, found: boolean");
     	} else {
     		s.append(this.gauche.toMips());
-    	}
-    	
+    	}*/
+    	s.append(this.gauche.toMips());
+    	s.append(this.droite.toMips());
     	return s;
     }
     

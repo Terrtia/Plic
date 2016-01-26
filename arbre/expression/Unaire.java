@@ -17,6 +17,12 @@ public abstract class Unaire extends Expression {
     
     public abstract String operateur() ;
 
+    public StringBuilder toMipsUnaire() {
+    	StringBuilder s = new StringBuilder();
+    	s.append(expression.toMips());
+    	return s;
+    }
+    
     @Override
     public String toString() {
         return "(" + operateur() + expression + ")" ;
