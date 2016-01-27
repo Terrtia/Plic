@@ -33,6 +33,8 @@ public class Plic {
             FileOutputStream fos = new FileOutputStream(nom);
             fos.write(arbre.toMips().getBytes());
             fos.close();
+            
+            System.out.println("COMPILATION: OK\n");
         } 
         catch (FileNotFoundException ex) {
             System.err.println("Fichier " + fichier + " inexistant") ;
