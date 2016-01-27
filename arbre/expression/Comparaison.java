@@ -13,7 +13,7 @@ public abstract class Comparaison extends Binaire {
     }
     
     public boolean verify(){
-    	return (gauche.estBoolean() == droite.estBoolean()) && gauche.verify() && droite.verify();
+    	return (gauche.estBoolean() == droite.estBoolean());
     }
 
     public boolean estBoolean(){

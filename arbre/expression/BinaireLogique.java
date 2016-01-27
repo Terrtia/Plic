@@ -12,6 +12,10 @@ public abstract class BinaireLogique extends Binaire {
         super(gauche, droite) ;
     }
     
+    public boolean estBoolean(){
+    	return true;
+    }
+    
     public boolean verify(){
     	return (gauche.estBoolean() == droite.estBoolean()) && gauche.verify() && droite.verify();
     }
