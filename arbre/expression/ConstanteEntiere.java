@@ -16,6 +16,13 @@ public class ConstanteEntiere extends Constante {
     	return true;
     }
     
+    public boolean est0() {
+    	if(cste.equals("0"))
+    		return true;
+    	else
+    		return false;
+    }
+    
 	public String toMips() {
 		StringBuilder s = new StringBuilder();
 		s.append("li $v0, " + this.cste + "\n");

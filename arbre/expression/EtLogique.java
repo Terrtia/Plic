@@ -1,6 +1,6 @@
 package plic.arbre.expression;
 
-import plic.exceptions.AnalyseSyntaxiqueException;
+import plic.exceptions.AnalyseSemantiqueException;
 
 /**
  * 3 déc. 2015
@@ -37,7 +37,7 @@ public class EtLogique extends BinaireLogique {
 			sb.append("addi $sp, $sp, -4\n");
 			sb.append("\n");
 		}else{
-			throw new AnalyseSyntaxiqueException("ligne 1, et logique, operandes avec des types differents\n");
+			throw new AnalyseSemantiqueException("ligne 1, et logique, operandes avec des types differents\n");
 		}
 		return sb.toString();
 	}

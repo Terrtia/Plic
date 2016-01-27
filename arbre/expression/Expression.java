@@ -27,6 +27,10 @@ public abstract class Expression extends ArbreAbstrait {
     	return false;
     }
     
+    protected boolean est0(){
+    	return false;
+    }
+    
     public abstract boolean verify();
 
 }

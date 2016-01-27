@@ -1,6 +1,6 @@
 package plic.arbre.expression;
 
-import plic.exceptions.AnalyseSyntaxiqueException;
+import plic.exceptions.AnalyseSemantiqueException;
 
 /**
  * 3 déc. 2015
@@ -22,7 +22,7 @@ public class NonLogique extends Unaire {
 	public String toMips() {
 		StringBuilder s = toMipsUnaire();
 		if(!verify()) 
-			throw new AnalyseSyntaxiqueException("ligne 1, booleen requis apres un non logique\n");
+			throw new AnalyseSemantiqueException("ligne 1, booleen requis apres un non logique\n");
 		s.append("# NonLogique\n");
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $v0, ($sp)\n");

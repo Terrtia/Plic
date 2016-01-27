@@ -1,6 +1,6 @@
 package plic.arbre.expression;
 
-import plic.exceptions.AnalyseSyntaxiqueException;
+import plic.exceptions.AnalyseSemantiqueException;
 
 /**
  * 3 déc. 2015
@@ -23,11 +23,11 @@ public abstract class BinaireArithmetique extends Binaire {
     	
     	if(!this.verify()) {
     		if(gauche.estBoolean()){
-    			throw new AnalyseSyntaxiqueException("ligne 1, Operation: " + this.operateur() + ", Operande gauche, trouve: Booleen, attendu: Entier\n");
+    			throw new AnalyseSemantiqueException("ligne 1, Operation: " + this.operateur() + ", Operande gauche, trouve: Booleen, attendu: Entier\n");
     		} else if(droite.estBoolean()) {
-    			throw new AnalyseSyntaxiqueException("ligne 1, Operation: " + this.operateur() + ", Operande droite, trouve: Booleen, attendu: Entier\n");
+    			throw new AnalyseSemantiqueException("ligne 1, Operation: " + this.operateur() + ", Operande droite, trouve: Booleen, attendu: Entier\n");
     		} else {
-    			throw new AnalyseSyntaxiqueException("ligne 1, ERROR 0x54A551E54\n");
+    			throw new AnalyseSemantiqueException("ligne 1, division par 0 impossible\n");
     		}
     
     	}

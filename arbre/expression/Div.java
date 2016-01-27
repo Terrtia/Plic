@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.exceptions.AnalyseSemantiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -20,6 +22,8 @@ public class Div extends BinaireArithmetique {
 	@Override
 	public String toMips() {
 		StringBuilder s = toMipsBinaireArithmetique();
+		if(!verify())
+			throw new AnalyseSemantiqueException("ligne 1, division par 0 impossible\n");
 		s.append("# Div\n");
 		//Right
 		s.append("add $sp, $sp, 4\n");
@@ -37,4 +41,8 @@ public class Div extends BinaireArithmetique {
 		return s.toString();
 	}
     
+	public boolean verify(){
+    	return (gauche.estEntier() && droite.estEntier() && !droite.est0());
+    }
+	
 }
