@@ -22,7 +22,7 @@ public class MoinsUnaire extends Unaire {
 	public String toMips() {
 		StringBuilder s = toMipsUnaire();
 		if(!verify())
-			throw new AnalyseSyntaxiqueException("entier requis apres l'operateur unaire - \n");
+			throw new AnalyseSyntaxiqueException("ligne 1, entier requis apres l'operateur unaire - \n");
 		s.append("# MoinsUnaire\n");
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $v0, ($sp)\n");
@@ -33,6 +33,7 @@ public class MoinsUnaire extends Unaire {
 		
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4\n");
+		s.append("\n");
 		return s.toString();
 	}
 

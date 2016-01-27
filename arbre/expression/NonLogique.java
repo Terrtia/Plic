@@ -22,7 +22,7 @@ public class NonLogique extends Unaire {
 	public String toMips() {
 		StringBuilder s = toMipsUnaire();
 		if(!verify()) 
-			throw new AnalyseSyntaxiqueException("booleen requis apres un non logique\n");
+			throw new AnalyseSyntaxiqueException("ligne 1, booleen requis apres un non logique\n");
 		s.append("# NonLogique\n");
 		s.append("add $sp, $sp, 4\n");
 		s.append("lw $v0, ($sp)\n");
@@ -30,6 +30,7 @@ public class NonLogique extends Unaire {
 		s.append("addi $v0, $v0, 2\n");
 		s.append("sw $v0, ($sp)\n");
 		s.append("addi $sp, $sp, -4\n");
+		s.append("\n");
 		return s.toString();
 	}
 

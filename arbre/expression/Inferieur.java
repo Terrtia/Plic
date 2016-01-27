@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.exceptions.AnalyseSyntaxiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -34,8 +36,9 @@ public class Inferieur extends Comparaison {
 			sb.append("slt $v0, $v0, $t8\n");
 			sb.append("sw $v0, ($sp)\n");
 			sb.append("addi $sp, $sp, -4\n");
+			sb.append("\n");
 		}else{
-			System.err.println("Exected the same type");
+			throw new AnalyseSyntaxiqueException("ligne 1, Inferieur, operandes avec des types differents\n");
 		}
 		return sb.toString();
 	}

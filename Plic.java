@@ -1,9 +1,11 @@
 package plic ;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import plic.analyse.AnalyseurLexical;
 import plic.analyse.AnalyseurSyntaxique;
 import plic.arbre.ArbreAbstrait;
@@ -21,8 +23,16 @@ public class Plic {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(fichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
-            System.err.println("expression stockée dans l'arbre : \n ---------\n" + arbre.toMips());
+            //System.err.println("expression stockée dans l'arbre : \n ---------\n" + arbre.toMips());
             
+            String nom;
+            nom = fichier.substring(0, fichier.length()-5);
+            
+            nom = nom + ".mips";
+            
+            FileOutputStream fos = new FileOutputStream(nom);
+            fos.write(arbre.toMips().getBytes());
+            fos.close();
         } 
         catch (FileNotFoundException ex) {
             System.err.println("Fichier " + fichier + " inexistant") ;
@@ -33,6 +43,7 @@ public class Plic {
         catch (Exception ex) {
             Logger.getLogger(Plic.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     public static void main(String[] args) {
