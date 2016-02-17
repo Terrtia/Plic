@@ -34,12 +34,19 @@ csteB = "vrai" | "faux"
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
+statut = "privee" | "publique"
+type = "entier"
+
+idf = [a-z]+
+
 %%
 
 "+"                	{ return symbol(CodesLexicaux.PLUS); }
 "-"                	{ return symbol(CodesLexicaux.MOINS); }
 "*"                	{ return symbol(CodesLexicaux.MULT); }
 "/"                	{ return symbol(CodesLexicaux.DIV); }
+"="			{return symbol(CodesLexicaux.EGAL); }
+";"			{return symbol(CodesLexicaux.POINTVIRGULE); }
 
 "=="                    { return symbol(CodesLexicaux.EGALEGAL); }
 "!="                    { return symbol(CodesLexicaux.DIFF); }
@@ -53,9 +60,18 @@ espace = {finDeLigne}  | [ \t\f]
 "("                	{ return symbol(CodesLexicaux.PAROUV); }
 ")"                	{ return symbol(CodesLexicaux.PARFER); }
 
+"classe"		{return symbol(CodesLexicaux.CLASS,yytext());}
+"ecrire"		{return symbol(CodesLexicaux.ECR,yytext());}
+"fin"			{return symbol(CodesLexicaux.FIN,yytext());}
+
+{idf} 			{return symbol(CodesLexicaux.IDF,yytext());}
+{statut}		{return symbol(CodesLexicaux.STATUT,yytext());}
+{type}			{return symbol(CodesLexicaux.TYPE,yytext());}
+
 {csteE}      	        { return symbol(CodesLexicaux.CONSTANTEINT, yytext()); }
 {csteB}      	        { return symbol(CodesLexicaux.CONSTANTEBOOL, yytext()); }
 
 {espace}                { }
+
 
 .                       { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
