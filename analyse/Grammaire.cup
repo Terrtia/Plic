@@ -154,17 +154,27 @@ CSTE    ::=     CONSTANTEINT:e
 SYSTEME ::= CLASSE
 ;
 
-CLASSE ::= CLASS IDF /*instruction*/FIN
+CLASSE ::= CLASS IDF LDECL FIN
 ;
 
 DECLARATION ::= 	DECL_CHAMP
 		|	DECL_CONST	
 ;
 
-DECL_CHAMP ::= STATUT TYPE IDF /* idf*/
+LDECL ::= DECLARATION
+		|LDECL DECLARATION
+		;
+
+LIDF ::= IDF 
+		|LIDF ,IDF
 ;
 
-DECL_CONST ::= /*instruction*/
+DECL_CHAMP ::= STATUT TYPE LIDF
+;
+
+
+DECL_CONST ::= INSTRUCTION
+			|DECL_CONST INSTRUCTION //rajouter le saut de ligne
 ;
 
 INSTRUCTION ::=	 	AFFECT
@@ -178,5 +188,6 @@ ACCES ::= IDF
 ;
 
 ECRIRE ::= ECR EXPR POINTVIRGULE
+//ecrireChaine
 ;
 
