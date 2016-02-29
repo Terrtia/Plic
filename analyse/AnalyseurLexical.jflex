@@ -39,6 +39,7 @@ type = "entier"
 
 idf = [a-z]+
 
+
 %%
 
 "+"                	{ return symbol(CodesLexicaux.PLUS); }

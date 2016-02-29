@@ -154,7 +154,8 @@ CSTE    ::=     CONSTANTEINT:e
 SYSTEME ::= CLASSE
 ;
 
-CLASSE ::= CLASS IDF LDECL FIN
+CLASSE ::= CLASS:c IDF:idf LDECL:le FIN
+{: System.out.println(c+""+idf); :}
 ;
 
 DECLARATION ::= 	DECL_CHAMP
@@ -165,11 +166,13 @@ LDECL ::= DECLARATION
 		|LDECL DECLARATION
 		;
 
-LIDF ::= IDF 
+LIDF ::= IDF :id
+		{: System.out.println(id); :}
 		|LIDF ,IDF
 ;
 
-DECL_CHAMP ::= STATUT TYPE LIDF
+DECL_CHAMP ::= STATUT:s TYPE:t LIDF
+{:System.out.println("declaration "+t); :}
 ;
 
 
@@ -181,10 +184,12 @@ INSTRUCTION ::=	 	AFFECT
 		|	ECRIRE
 ;
 
-AFFECT ::= ACCES EGAL EXPR
+AFFECT ::= ACCES:a EGAL EXPR:expr
+{: System.out.println(a+" prend " +expr); :}
 ;
 
-ACCES ::= IDF
+ACCES ::= IDF:i
+{: System.out.println(i); :}
 ;
 
 ECRIRE ::= ECR EXPR POINTVIRGULE
