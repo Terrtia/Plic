@@ -3,6 +3,9 @@ package plic.analyse ;
 import java.util.*;
 import plic.arbre.* ;
 import plic.arbre.expression.* ;
+import plic.tds.*;
+import plic.tds.entrees.*;
+import plic.tds.symboles.*;
 import plic.exceptions.AnalyseSyntaxiqueException;
 
 import java_cup.runtime.*;
@@ -29,6 +32,9 @@ parser code {:
         lesTerminaux.put(new Integer(CodesLexicaux.ET), "et") ;
         lesTerminaux.put(new Integer(CodesLexicaux.OU), "ou") ;
         lesTerminaux.put(new Integer(CodesLexicaux.NON), "non") ;
+        lesTerminaux.put(new Integer(CodesLexicaux.CLASS), "classe");
+        lesTerminaux.put(new Integer(CodesLexicaux.ECR), "ecrire");
+        lesTerminaux.put(new Integer(CodesLexicaux.FIN), "fin");
 
         StringBuffer m = new StringBuffer() ;
 
@@ -66,23 +72,23 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE ;
-terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON ;
-terminal String    CONSTANTEINT, CONSTANTEBOOL,IDF,TYPE,STATUT,CLASS,ECR,FIN ;
+terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, CLASS,ECR,FIN, VIRGULE ;
+terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON, CONSTANTEINT, CONSTANTEBOOL,IDF,TYPE,STATUT ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG ;
 non terminal Expression EXPR, CSTE ;
 
-/* je sais pas de quel type les foutre
-non terminal SYSTEME 
+// je sais pas de quel type les foutre
+/*non terminal SYSTEME 
 non terminal CLASSE
 non terminal DECLARATION
 non terminal INSTRUCTION
 non terminal AFFECT
-non terminal ECRIRE
-*/
+non terminal ECRIRE*/
+non terminal ArbreAbstrait SYSTEME, CLASSE, DECLARATION, LDECL, DECL_CONST, INSTRUCTION, AFFECT, ECRIRE, DECL_CHAMP;
+non terminal String ACCES, LIDF;
 
 precedence left INF, SUP ;
 precedence left EGALEGAL, DIFF;
@@ -94,7 +100,8 @@ precedence left NON ;
 
 /* ----------------------------Grammar Section-------------------- */
  
-start with PROG ;
+//start with PROG ;
+start with SYSTEME ;
 
 PROG    ::=     EXPR:e 
                 {: BlocDInstructions arbre = new BlocDInstructions() ;
@@ -151,25 +158,38 @@ CSTE    ::=     CONSTANTEINT:e
                 {: RESULT = new ConstanteBool(e) ; :}
                 ;
 
-SYSTEME ::= CLASSE
+SYSTEME ::= CLASSE:c
+			{: System.out.println("systeme"); RESULT = c; :}
 ;
 
-CLASSE ::= CLASS IDF LDECL FIN
+CLASSE ::= CLASS IDF LDECL:d FIN
+			{: System.out.println("classe"); TDS.getInstance().entrerBloc();
+			TDS.getInstance().sortirBloc();
+			RESULT = d; }
 ;
 
-DECLARATION ::= 	DECL_CHAMP
-		|	DECL_CONST	
+DECLARATION ::= 	DECL_CHAMP:d POINTVIRGULE
+				{: System.out.println("declaration"); RESULT = d; :}
+		|	DECL_CONST:d	POINTVIRGULE
+		 {: RESULT = d; :}
 ;
 
-LDECL ::= DECLARATION
-		|LDECL DECLARATION
+LDECL ::= DECLARATION:d
+		{: System.out.println("ldecl"); ArbreAbstrait l = new BlocDInstructions();
+			((BlocDInstructions)l).ajouter(d);
+			RESULT = l; :}
+		|LDECL:l DECLARATION:d
+		{: (BlocDInstructions)l).ajouter(d);
+			RESULT = l; : :}
 		;
 
-LIDF ::= IDF 
-		|LIDF ,IDF
+LIDF ::= IDF:i
+		{: System.out.println("lidf"); RESULT = i; :}
+		|LIDF VIRGULE IDF
 ;
 
-DECL_CHAMP ::= STATUT TYPE LIDF
+DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n
+				{: System.out.println("decl_champ"); RESULT = new Declaration(n,t,s); :}
 ;
 
 
@@ -177,17 +197,18 @@ DECL_CONST ::= INSTRUCTION
 			|DECL_CONST INSTRUCTION //rajouter le saut de ligne
 ;
 
-INSTRUCTION ::=	 	AFFECT
-		|	ECRIRE
+INSTRUCTION ::=	 	AFFECT POINTVIRGULE
+		|	ECRIRE POINTVIRGULE
 ;
 
 AFFECT ::= ACCES EGAL EXPR
+			
 ;
 
 ACCES ::= IDF
 ;
 
-ECRIRE ::= ECR EXPR POINTVIRGULE
+ECRIRE ::= ECR EXPR
 //ecrireChaine
 ;
 

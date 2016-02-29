@@ -5,6 +5,10 @@ public abstract class Entree {
 	protected String idf;
 	protected int ligne;
 	
+	public Entree(String nom) {
+		idf = nom;
+	}
+	
 	public Entree(String nom, int l) {
 		idf = nom;
 		ligne = l;
@@ -24,6 +28,11 @@ public abstract class Entree {
 
 	public void setLigne(int ligne) {
 		this.ligne = ligne;
+	}
+
+	@Override
+	public String toString() {
+		return "Entree [idf=" + idf + ", ligne=" + ligne + "]";
 	}
 	
 	
