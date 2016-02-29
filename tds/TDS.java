@@ -15,7 +15,7 @@ public class TDS {
 	private boolean analyseSemantique;
 	
 	private TDS() {
-		
+		ldico = new ArrayList<DictLocal>();
 	}
 	
 	public static TDS getInstance() {
@@ -30,9 +30,9 @@ public class TDS {
 		dico.ajouter(e, s);
 	}
 	
-	/*public Symbole identifier(Entree e) {
-		return ldico.identifier(e);
-	}*/
+	public Symbole identifier(Entree e) {
+		return dico.identifier(e);
+	}
 	
 	public void entrerBloc() {
 		
@@ -45,7 +45,7 @@ public class TDS {
 		}
 	}
 	
-	public void sortieBloc() {
+	public void sortirBloc() {
 		
 		if(!this.analyseSemantique){
 			dico = dico.getParent();

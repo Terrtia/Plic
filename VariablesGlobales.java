@@ -1,13 +1,17 @@
 package plic;
 
+import java.util.ArrayList;
+
 public class VariablesGlobales {
 
 	private static VariablesGlobales instance = new VariablesGlobales();
 	
 	private int numeroBloc;
+	private ArrayList<String> dataString;
 	
 	private VariablesGlobales() {
 		numeroBloc = -1;
+		dataString = new ArrayList<>();
 	}
 	
 	public static VariablesGlobales getInstance() {
@@ -20,5 +24,16 @@ public class VariablesGlobales {
 	
 	public void IncrNumeroBloc() {
 		this.numeroBloc++;
+	}
+	
+	public void addData(String str){
+		dataString.add(str);
+	}
+	public String getData(int i){
+		return dataString.get(i);
+	}
+
+	public int getDataSize() {
+		return dataString.size();
 	}
 }

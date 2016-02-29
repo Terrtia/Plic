@@ -23,7 +23,7 @@ public abstract class Expression extends ArbreAbstrait {
     	return false;
     }
     
-    protected boolean estEntier(){
+    public boolean estEntier(){
     	return false;
     }
     

@@ -3,6 +3,7 @@ package plic.tds;
 import java.util.HashMap;
 
 import plic.exceptions.DoubleDeclarationException;
+import plic.exceptions.EntreeNonDeclareeException;
 import plic.tds.entrees.Entree;
 import plic.tds.symboles.Symbole;
 
@@ -29,11 +30,21 @@ public class DictLocal {
 
 	public void ajouter(Entree e, Symbole s) {
 		if(dico.containsKey(e)){
-			throw new DoubleDeclarationException("");
+			throw new DoubleDeclarationException(e.getIdf());
 		} else {
 			dico.put(e, s);	
 		}
 		
+	}
+	
+	public Symbole identifier(Entree e) {
+		if(dico.containsKey(e)) {
+			return dico.get(e);
+		}else if(!dico.containsKey(e) && numeroBloc == 0) {
+			throw new EntreeNonDeclareeException(e.getIdf());
+		}else {
+			return getParent().identifier(e);
+		}
 	}
 	
 	

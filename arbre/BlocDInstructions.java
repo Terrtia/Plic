@@ -1,5 +1,7 @@
 package plic.arbre;
 
+import plic.VariablesGlobales;
+
 
 /**
  * 3 déc. 2015
@@ -11,6 +13,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
 	//protected ArrayList<ArbreAbstrait> arbre;
     protected ArbreAbstrait expr ;
+    
     
     public BlocDInstructions() {
         super();
@@ -26,6 +29,19 @@ public class BlocDInstructions extends ArbreAbstrait {
         return expr.toString() ;
     }
 
+    public String data(){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(".data\n");
+    	VariablesGlobales vg = VariablesGlobales.getInstance();
+    	for(int i = 0;i < vg.getDataSize();i++){
+    		sb.append("str"+i+" : .asciiz ");
+    		sb.append("\"" + vg.getData(i) + " \" \n");
+    	}
+ 
+    	
+    	return sb.toString();
+    }
+    
     public String entete() {
     	StringBuilder s = new StringBuilder();
     	s.append(".text\n");
@@ -44,12 +60,11 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     @Override
 	public String toMips() {
-    	/*String codeMips = "";
-		for(ArbreAbstrait a: arbre) {
-			codeMips = codeMips + a.toMips();
-		}
-		return codeMips;*/
-    	return this.entete() + this.expr.toMips() + this.fin();
+    	String codeMips = "";
+		//for(ArbreAbstrait a: arbre) {
+		//	codeMips = codeMips + a.toMips();
+		//}
+    	return this.data()+this.entete() + codeMips + this.fin();
 	}
 
 }

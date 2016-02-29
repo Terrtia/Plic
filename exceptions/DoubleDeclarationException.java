@@ -4,7 +4,7 @@ package plic.exceptions;
 public class DoubleDeclarationException extends AnalyseException {
 
 	public DoubleDeclarationException(String m) {
-		super(m);
+		super("Double declaration de l'entree : " + m + "\n");
 	}
 
 }
