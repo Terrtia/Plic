@@ -78,16 +78,9 @@ terminal String 	IDF,TYPE,STATUT,CONSTANTEINT, CONSTANTEBOOL;
 non terminal ArbreAbstrait PROG ;
 non terminal Expression EXPR, CSTE ;
 
-// je sais pas de quel type les foutre
-/*non terminal SYSTEME 
-non terminal CLASSE
-non terminal DECLARATION
-non terminal INSTRUCTION
-non terminal AFFECT
-non terminal ECRIRE*/
 non terminal ArbreAbstrait SYSTEME, CLASSE, INSTRUCTION, AFFECT, ECRIRE, LDECL, DECLARATION, DECL_CONST, DECL_CHAMP;
-//non terminal BlocDInstructions LDECL, DECLARATION, DECL_CONST, DECL_CHAMP;
-non terminal String ACCES, LIDF;
+non terminal String ACCES;
+non terminal ArrayList<String> LIDF;
 
 precedence left INF, SUP ;
 precedence left EGALEGAL, DIFF;
@@ -163,19 +156,17 @@ SYSTEME ::= CLASSE:c
 
 
 CLASSE ::= CLASS IDF LDECL:d FIN
-			{: System.out.println("classe"); TDS.getInstance().entrerBloc();
-			TDS.getInstance().sortirBloc();
-			RESULT = d; :}
+			{: RESULT = d; :}
 ;
 
 DECLARATION ::= DECL_CHAMP:d POINTVIRGULE
-				{: System.out.println("declaration"); RESULT = d; :}
+				{: RESULT = d; :}
 		|	DECL_CONST:d	POINTVIRGULE
 		 {: RESULT = d; :}
 ;
 
 LDECL ::= DECLARATION:d
-		{: System.out.println("ldecl"); BlocDInstructions l = new BlocDInstructions();
+		{: BlocDInstructions l = new BlocDInstructions();
 			l.ajouter(d);
 			RESULT = l; :}
 		|LDECL:l DECLARATION:d
@@ -185,12 +176,22 @@ LDECL ::= DECLARATION:d
 
 
 LIDF ::= IDF:i
-		{: System.out.println("lidf"); RESULT = i; :}
-		|LIDF VIRGULE IDF
+		{: System.out.println("lidf"); 
+		ArrayList<String> lidf = new ArrayList<String>();
+		lidf.add(i);
+		RESULT = lidf; :}
+		|LIDF:lidf VIRGULE IDF:i
+		{: lidf.add(i);
+		RESULT = lidf; :}
 ;
 
 DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n
-				{: System.out.println("decl_champ " + s + " " + t + " " + n); RESULT = new Declaration(n,t,s); :}
+				{: System.out.println("decl_champ " + s + " " + t + " " + n); 
+				BlocDInstructions l = new BlocDInstructions();
+				for(String nidf : n) {
+					l.ajouter(new Declaration(nidf,t,s));
+				}
+				RESULT = l; :}
 ;
 
 

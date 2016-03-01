@@ -16,10 +16,15 @@ public class TDS {
 	
 	private TDS() {
 		ldico = new ArrayList<DictLocal>();
+		dico = new DictLocal(null, 0);
 	}
 	
 	public static TDS getInstance() {
 		return instance;
+	}
+	
+	public int getTailleZoneVar() {
+		return dico.getDep();
 	}
 	
 	public void setAnalyseSemantique() {
@@ -28,6 +33,7 @@ public class TDS {
 	
 	public void ajouter(Entree e, Symbole s) {
 		dico.ajouter(e, s);
+		System.out.println(toString());
 	}
 	
 	public Symbole identifier(Entree e) {
@@ -35,7 +41,6 @@ public class TDS {
 	}
 	
 	public void entrerBloc() {
-		
 		if(!this.analyseSemantique){
 			VariablesGlobales.getInstance().IncrNumeroBloc(); //Bloc ++
 			dico = new DictLocal(dico, VariablesGlobales.getInstance().getNumeroBloc());
@@ -53,6 +58,12 @@ public class TDS {
 		} else {    //analyse Semantique
 			
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "TDS [ldico=" + ldico.toString() + ", dico=" + dico
+				+ ", analyseSemantique=" + analyseSemantique + "]";
 	}
 	
 }

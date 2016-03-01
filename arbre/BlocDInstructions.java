@@ -1,6 +1,7 @@
 package plic.arbre;
 
 import plic.VariablesGlobales;
+import plic.tds.TDS;
 
 
 /**
@@ -46,6 +47,9 @@ public class BlocDInstructions extends ArbreAbstrait {
     	StringBuilder s = new StringBuilder();
     	s.append(".text\n");
     	s.append("main :\n\n");
+    	s.append("# Declarations\n");
+		s.append("move $s7,$sp\n");
+		s.append("addi $sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n");
     	return s.toString();
     }
     

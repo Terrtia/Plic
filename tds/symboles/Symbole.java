@@ -12,6 +12,10 @@ public abstract class Symbole {
 				+ "]";
 	}
 	
+	public void setDep(int d) {
+		dep = d;
+	}
+	
 	/*public Symbole(String t, String s, int d) {
 		type = t;
 		statut = s;
