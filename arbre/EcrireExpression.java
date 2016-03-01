@@ -1,11 +1,8 @@
 package plic.arbre;
 
-import plic.VariablesGlobales;
 import plic.arbre.expression.Expression;
-import plic.tds.TDS;
 
-public class EcrireExpression {
-	private TDS tds;
+public class EcrireExpression extends ArbreAbstrait{
 	private Expression message ;
 	
 	public EcrireExpression(Expression mess){
@@ -14,7 +11,7 @@ public class EcrireExpression {
 	
 	public String toMips(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(message.toString());
+		sb.append(message.toMips());
 		sb.append("move $a0, $v0\n");
 		sb.append("li $v0 4\n");
 		sb.append("syscall\n");

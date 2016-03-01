@@ -139,6 +139,10 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
         |
                 CSTE:c
                 {: RESULT = c ; :}
+        |		
+        		ACCES:a
+        		{: RESULT = a; :}
+        
         |
                 PAROUV  EXPR:e  PARFER
                 {: RESULT = e ; :}
@@ -151,7 +155,7 @@ CSTE    ::=     CONSTANTEINT:e
                 ;
 
 SYSTEME ::= CLASSE:c
-			{: System.out.println("systeme"); RESULT = c; :}
+			{: RESULT = c; :}
 ;
 
 
@@ -195,12 +199,19 @@ DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n
 ;
 
 
-DECL_CONST ::= INSTRUCTION
-			|DECL_CONST INSTRUCTION //rajouter le saut de ligne
+DECL_CONST ::= INSTRUCTION:i
+			{: BlocDInstructions l = new BlocDInstructions();
+			l.ajouter(i);
+			RESULT = l; :}
+			|DECL_CONST:l INSTRUCTION:i 
+			{: ((BlocDInstructions)l).ajouter(i);
+				RESULT = l; :}
 ;
 
-INSTRUCTION ::=	 	AFFECT POINTVIRGULE
-		|	ECRIRE POINTVIRGULE
+INSTRUCTION ::=	AFFECT:a
+				{: RESULT = a; :}
+			|	ECRIRE:e
+			{: RESULT = e; :}
 ;
 
 AFFECT ::= ACCES:a EGAL EXPR:expr
@@ -212,7 +223,7 @@ ACCES ::= IDF:i
 {: System.out.println(i); :}
 ;
 
-ECRIRE ::= ECR EXPR
-//ecrireChaine
+ECRIRE ::= ECR EXPR:e
+			{: RESULT = new EcrireExpression(e); :}
 ;
 
