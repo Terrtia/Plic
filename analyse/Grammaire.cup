@@ -32,9 +32,6 @@ parser code {:
         lesTerminaux.put(new Integer(CodesLexicaux.ET), "et") ;
         lesTerminaux.put(new Integer(CodesLexicaux.OU), "ou") ;
         lesTerminaux.put(new Integer(CodesLexicaux.NON), "non") ;
-        lesTerminaux.put(new Integer(CodesLexicaux.CLASS), "classe");
-        lesTerminaux.put(new Integer(CodesLexicaux.ECR), "ecrire");
-        lesTerminaux.put(new Integer(CodesLexicaux.FIN), "fin");
 
         StringBuffer m = new StringBuffer() ;
 
@@ -73,7 +70,8 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, CLASS,ECR,FIN, VIRGULE ;
-terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON, CONSTANTEINT, CONSTANTEBOOL,IDF,TYPE,STATUT ;
+terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON;
+terminal String 	IDF,TYPE,STATUT,CONSTANTEINT, CONSTANTEBOOL;
    
 /* Non terminals used in the grammar section.  */
 
@@ -87,7 +85,8 @@ non terminal DECLARATION
 non terminal INSTRUCTION
 non terminal AFFECT
 non terminal ECRIRE*/
-non terminal ArbreAbstrait SYSTEME, CLASSE, DECLARATION, LDECL, DECL_CONST, INSTRUCTION, AFFECT, ECRIRE, DECL_CHAMP;
+non terminal ArbreAbstrait SYSTEME, CLASSE, INSTRUCTION, AFFECT, ECRIRE, LDECL, DECLARATION, DECL_CONST, DECL_CHAMP;
+//non terminal BlocDInstructions LDECL, DECLARATION, DECL_CONST, DECL_CHAMP;
 non terminal String ACCES, LIDF;
 
 precedence left INF, SUP ;
@@ -166,22 +165,22 @@ SYSTEME ::= CLASSE:c
 CLASSE ::= CLASS IDF LDECL:d FIN
 			{: System.out.println("classe"); TDS.getInstance().entrerBloc();
 			TDS.getInstance().sortirBloc();
-			RESULT = d; }
+			RESULT = d; :}
 ;
 
-DECLARATION ::= 	DECL_CHAMP:d POINTVIRGULE
+DECLARATION ::= DECL_CHAMP:d POINTVIRGULE
 				{: System.out.println("declaration"); RESULT = d; :}
 		|	DECL_CONST:d	POINTVIRGULE
 		 {: RESULT = d; :}
 ;
 
 LDECL ::= DECLARATION:d
-		{: System.out.println("ldecl"); ArbreAbstrait l = new BlocDInstructions();
-			((BlocDInstructions)l).ajouter(d);
+		{: System.out.println("ldecl"); BlocDInstructions l = new BlocDInstructions();
+			l.ajouter(d);
 			RESULT = l; :}
 		|LDECL:l DECLARATION:d
-		{: (BlocDInstructions)l).ajouter(d);
-			RESULT = l; : :}
+		{: ((BlocDInstructions)l).ajouter(d);
+			RESULT = l; :}
 		;
 
 
@@ -191,7 +190,7 @@ LIDF ::= IDF:i
 ;
 
 DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n
-				{: System.out.println("decl_champ"); RESULT = new Declaration(n,t,s); :}
+				{: System.out.println("decl_champ " + s + " " + t + " " + n); RESULT = new Declaration(n,t,s); :}
 ;
 
 
