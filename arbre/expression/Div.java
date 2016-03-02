@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -44,5 +45,11 @@ public class Div extends BinaireArithmetique {
 	public boolean verify(){
     	return (gauche.estEntier() && droite.estEntier() && !droite.est0());
     }
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

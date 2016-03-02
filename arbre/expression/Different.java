@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -42,6 +43,12 @@ public class Different extends Comparaison {
 			throw new AnalyseSemantiqueException("ligne 1, Different, operandes avec des types differents\n");
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
     
     

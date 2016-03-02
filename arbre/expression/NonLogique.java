@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -37,6 +38,12 @@ public class NonLogique extends Unaire {
 	@Override
 	public boolean verify() {
 		return expression.estBoolean();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

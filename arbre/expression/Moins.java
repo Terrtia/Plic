@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
+
 /**
  * 3 déc. 2015
  *
@@ -34,6 +36,12 @@ public class Moins extends BinaireArithmetique {
 		s.append("addi $sp, $sp, -4\n");
 		s.append("\n");
 		return s.toString();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
     
 }

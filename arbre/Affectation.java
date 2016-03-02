@@ -29,4 +29,10 @@ public class Affectation extends ArbreAbstrait{
 		return droite.estEntier() == (type.equals("entier"));
 	}
 
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

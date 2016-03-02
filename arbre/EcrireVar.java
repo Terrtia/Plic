@@ -4,7 +4,7 @@ import plic.arbre.expression.Expression;
 import plic.tds.TDS;
 import plic.tds.entrees.EntreeVar;
 
-public class EcrireVar {
+public class EcrireVar extends ArbreAbstrait{
 	private String var; 
 
 	public EcrireVar(String var){
@@ -18,6 +18,12 @@ public class EcrireVar {
 		sb.append("li $v0 1\n");
 		sb.append("syscall\n");
 		return sb.toString();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

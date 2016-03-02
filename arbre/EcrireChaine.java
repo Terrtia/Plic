@@ -1,9 +1,8 @@
 package plic.arbre;
 import plic.VariablesGlobales;
-import plic.arbre.expression.Expression;
 import plic.tds.TDS;
 
-public class EcrireChaine {
+public class EcrireChaine extends ArbreAbstrait {
 	private TDS tds;
 	private String message ;
 		
@@ -18,6 +17,12 @@ public class EcrireChaine {
 		sb.append("li $v0, 4\n");
 		sb.append("syscall\n");
 		return sb.toString();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

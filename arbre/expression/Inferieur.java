@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -46,5 +47,11 @@ public class Inferieur extends Comparaison {
     public boolean verify(){
     	return gauche.estEntier() && droite.estEntier() && droite.verify() && gauche.verify();
     }
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

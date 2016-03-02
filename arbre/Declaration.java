@@ -1,6 +1,5 @@
-package plic.arbre.expression;
+package plic.arbre;
 
-import plic.arbre.ArbreAbstrait;
 import plic.tds.TDS;
 import plic.tds.entrees.EntreeVar;
 import plic.tds.symboles.SymboleVar;
@@ -17,6 +16,12 @@ public class Declaration extends ArbreAbstrait {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		return sb.toString();
+	}
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

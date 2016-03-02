@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -45,6 +46,12 @@ public class EtLogique extends BinaireLogique {
     public boolean verify(){
     	return gauche.estBoolean() && droite.estBoolean() && droite.verify() && gauche.verify();
     }
+
+	@Override
+	public void ajouter(ArbreAbstrait a) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
