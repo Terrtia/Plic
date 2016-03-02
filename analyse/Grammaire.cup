@@ -139,9 +139,6 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
         |
                 CSTE:c
                 {: RESULT = c ; :}
-        |		
-        		ACCES:a
-        		{: RESULT = a; :}
         
         |
                 PAROUV  EXPR:e  PARFER
@@ -215,12 +212,13 @@ INSTRUCTION ::=	AFFECT:a
 ;
 
 AFFECT ::= ACCES:a EGAL EXPR:expr
-{: System.out.println(a+" prend " +expr); :}
+		{: System.out.println(a+" prend " +expr); 
+			RESULT = new Affectation(expr, a); :}
 
 ;
 
 ACCES ::= IDF:i
-{: System.out.println(i); :}
+{: RESULT = i; :}
 ;
 
 ECRIRE ::= ECR EXPR:e

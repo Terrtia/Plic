@@ -34,7 +34,23 @@ public abstract class Entree {
 	public String toString() {
 		return "Entree [idf=" + idf + ", ligne=" + ligne + "]";
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Entree other = (Entree) obj;
+		if (idf == null) {
+			if (other.idf != null)
+				return false;
+		} else if (!idf.equals(other.idf))
+			return false;
+		return true;
+	}
 	
 
 }

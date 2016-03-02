@@ -49,7 +49,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     	s.append("main :\n\n");
     	s.append("# Declarations\n");
 		s.append("move $s7,$sp\n");
-		s.append("addi $sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n");
+		s.append("addi $sp,$sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n");
     	return s.toString();
     }
     
@@ -64,7 +64,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     @Override
 	public String toMips() {
-    	String codeMips = "";
+    	String codeMips = expr.toMips();
 		//for(ArbreAbstrait a: arbre) {
 		//	codeMips = codeMips + a.toMips();
 		//}

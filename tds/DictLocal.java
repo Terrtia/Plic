@@ -1,6 +1,7 @@
 package plic.tds;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import plic.exceptions.DoubleDeclarationException;
 import plic.exceptions.EntreeNonDeclareeException;
@@ -40,13 +41,17 @@ public class DictLocal {
 		} else {
 			s.setDep(dep);
 			dico.put(e, s);	
-			dep += 4; // 4 car seuls des int sont gérés
+			dep += 4; 
 		}
 		
 	}
 	
 	public Symbole identifier(Entree e) {
-		if(dico.containsKey(e)) {
+		for(Entree m : dico.keySet()) {
+			if(m.equals(e))
+				return dico.get(m);
+		}
+		if(dico.containsKey(e)) {	// containsKey ne fait pas l'égalité entre la nouvelle entrée e et celle du dico
 			return dico.get(e);
 		}else if(!dico.containsKey(e) && numeroBloc == 0) {
 			throw new EntreeNonDeclareeException(e.getIdf());

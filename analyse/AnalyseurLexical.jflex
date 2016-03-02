@@ -37,7 +37,6 @@ espace = {finDeLigne}  | [ \t\f]
 statut = "privee" | "publique"
 type = "entier"
 
-//idf = [a-z]+
 idf = [a-zA-Z][a-zA-Z0-9]*
 
 
