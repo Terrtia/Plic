@@ -37,6 +37,7 @@ csteC = ["][a-zA-Z]["]
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
+//idf = [a-z]+
 idf = [a-zA-Z][a-zA-Z0-9]*
 
 
@@ -64,36 +65,25 @@ idf = [a-zA-Z][a-zA-Z0-9]*
 "("                	{ return symbol(CodesLexicaux.PAROUV); }
 ")"                	{ return symbol(CodesLexicaux.PARFER); }
 
-"classe"                { return symbol(CodesLexicaux.CLASS); }
-"debut"            	{ return symbol(CodesLexicaux.DEBUT); }
-"fin"             	{ return symbol(CodesLexicaux.FIN); }
+"entier"		{ return symbol(CodesLexicaux.entier); }
+"publique"		{ return symbol(CodesLexicaux.publique); }
+"privee"		{ return symbol(CodesLexicaux.privee); }
 
-"publique"              { return symbol(CodesLexicaux.PUBLIQUE); }
-"privee"                { return symbol(CodesLexicaux.PRIVEE); }
-
-"entier"                { return symbol(CodesLexicaux.ENTIER); }
-
-"pour"                  { return symbol(CodesLexicaux.POUR); }
-"tantque"               { return symbol(CodesLexicaux.TANTQUE); }
-"repeter"               { return symbol(CodesLexicaux.REPETER); }
-"fintantque"            { return symbol(CodesLexicaux.FINTANTQUE); }
-"si"                    { return symbol(CodesLexicaux.SI); }
-"alors"                 { return symbol(CodesLexicaux.ALORS); }
-"sinon"                 { return symbol(CodesLexicaux.SINON); }
-"fsi"                   { return symbol(CodesLexicaux.FSI); }
-
-"lire"                  { return symbol(CodesLexicaux.LIR); }
-"ecrire"                { return symbol(CodesLexicaux.ECRIR); }
+"classe"		{ return symbol(CodesLexicaux.classe); }
+"ecrire"		{ return symbol(CodesLexicaux.ecrire); }
+"fin"			{ return symbol(CodesLexicaux.fin); }
 
 
-{csteE}      		{ return symbol(CodesLexicaux.CSTEINT, yytext()); }
-{csteB}      		{ return symbol(CodesLexicaux.CSTEBOOL, yytext()); }
-{csteC}			{ return symbol(CodesLexicaux.CSTECHAINE, yytext() ); }
 
-{idf} 			{return symbol(CodesLexicaux.IDF,yytext());}
+{csteE}      		{ return symbol(CodesLexicaux.CSTINT, yytext()); }
+{csteB}      		{ return symbol(CodesLexicaux.CSTBOOL, yytext()); }
+{csteC}			{ return symbol(CodesLexicaux.CSTCHAINE, yytext() ); }
+
+{idf} 			{return symbol(CodesLexicaux.idf,yytext());}
 
 
 
 {espace}                { }
+{finDeLigne}		{ }
 
 .                       { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
