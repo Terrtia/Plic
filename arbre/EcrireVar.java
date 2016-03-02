@@ -13,8 +13,8 @@ public class EcrireVar extends ArbreAbstrait{
 	
 	public String toMips(){
 		StringBuilder sb = new StringBuilder();
-		//int decalage = TDS.getInstance().identifier(new EntreeVar(var)).getDecalage();
-		//sb.append("lw $a0, "+decalage+"(s7)\n");
+		int decalage = TDS.getInstance().identifier(new EntreeVar(var)).getDep();
+		sb.append("lw $a0, "+decalage+"(s7)\n");
 		sb.append("li $v0 1\n");
 		sb.append("syscall\n");
 		return sb.toString();

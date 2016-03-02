@@ -366,7 +366,9 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 {: RESULT = c ; :}
         |		
         	IDF:i
-        	{: //RESULT = new identificateurExpression; :}
+        	{:
+        	 //RESULT = new identificateurExpression; 
+        	 :}
         
         |
                 PAROUV  EXPR:e  PARFER
