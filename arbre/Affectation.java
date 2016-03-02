@@ -4,22 +4,22 @@ import plic.arbre.expression.Expression;
 import plic.tds.TDS;
 import plic.tds.entrees.EntreeVar;
 
-public class Affectation {
+public class Affectation extends ArbreAbstrait{
 	private Expression droite;
 	private String gauche;
-	private TDS tds;
 	
-	public Affectation(Expression droite,String gauche,TDS t){
+	public Affectation(Expression droite,String gauche){
 		this.droite = droite;
 		this.gauche = gauche;
 	}
 	
 	public String toMips(){
 		StringBuilder sb = new StringBuilder();
+		sb.append("# Affectation\n");
 		sb.append(droite.toMips());
 		sb.append("\n");
-		//int decalage = tds.identifier(new EntreeVar(gauche));
-		//sb.append("sw $v0, decalage(s7)");
+		int decalage = TDS.getInstance().identifier(new EntreeVar(gauche)).getDep();
+		sb.append("sw $v0, " + decalage + "($s7)\n");
 		return sb.toString();	
 	}
 	

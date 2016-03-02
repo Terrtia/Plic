@@ -16,6 +16,19 @@ public abstract class Symbole {
 		dep = d;
 	}
 	
+	public void setType(String t) {
+		type = t;
+	}
+	
+	public void setStatut(String s) {
+		statut = s;
+	}
+
+	public int getDep() {
+		// TODO Auto-generated method stub
+		return dep;
+	}
+	
 	/*public Symbole(String t, String s, int d) {
 		type = t;
 		statut = s;
