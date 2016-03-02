@@ -320,8 +320,8 @@ ECRIRE		::=	ECRIR EXPR:e POINTVIRGULE
 			:}
 		|	ECRIR CSTECHAINE:c POINTVIRGULE
 			{:
-			   //ArbreAbstrait ab = new EcrireExpression(c); Classe a modifier, contient des erreurs (heritage ...)
-			   //RESULT = ab;
+			   ArbreAbstrait ab = new EcrireChaine(c);
+			   RESULT = ab;
 			:}
 			;
 

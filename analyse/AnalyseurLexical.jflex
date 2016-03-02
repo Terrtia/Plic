@@ -32,8 +32,7 @@ commentaireSlashSlash = [/][/].*
 
 csteE = [0-9]+
 csteB = "vrai" | "faux"
-csteC = ["][a-zA-Z]["]
-
+csteC = \"[a-zA-Z0-9]*\" 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
