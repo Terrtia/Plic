@@ -34,10 +34,5 @@ public class ConstanteEntiere extends Constante {
 		return s.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

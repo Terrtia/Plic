@@ -48,10 +48,5 @@ public class Superieur extends Comparaison {
     	return gauche.estEntier() && droite.estEntier() && droite.verify() && gauche.verify();
     }
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
     
 }

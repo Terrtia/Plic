@@ -38,10 +38,5 @@ public class Moins extends BinaireArithmetique {
 		return s.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
     
 }

@@ -18,10 +18,4 @@ public class Declaration extends ArbreAbstrait {
 		return sb.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -38,10 +38,4 @@ public class Plus extends BinaireArithmetique {
 		return s.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

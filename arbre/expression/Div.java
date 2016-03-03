@@ -46,10 +46,5 @@ public class Div extends BinaireArithmetique {
     	return (gauche.estEntier() && droite.estEntier() && !droite.est0());
     }
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

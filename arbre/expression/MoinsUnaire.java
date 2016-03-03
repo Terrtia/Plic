@@ -43,10 +43,5 @@ public class MoinsUnaire extends Unaire {
 		return expression.estEntier();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

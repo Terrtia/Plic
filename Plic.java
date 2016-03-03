@@ -10,6 +10,7 @@ import plic.analyse.AnalyseurLexical;
 import plic.analyse.AnalyseurSyntaxique;
 import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseException;
+import plic.tds.TDS;
 
 /**
  * 24 mars 2015 
@@ -31,7 +32,8 @@ public class Plic {
             nom = nom + ".mips";
             
             FileOutputStream fos = new FileOutputStream(nom);
-            fos.write(arbre.toMips().getBytes());
+            String mips = data()+entete()+arbre.toMips()+fin();
+            fos.write(mips.getBytes());
             fos.close();
             
             System.out.println("COMPILATION: OK\n");
@@ -47,14 +49,47 @@ public class Plic {
         }
         
     }
+    
+	public String data(){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(".data\n");
+    	VariablesGlobales vg = VariablesGlobales.getInstance();
+    	for(int i = 0;i < vg.getDataSize();i++){
+    		sb.append("str"+i+" : .asciiz ");
+    		sb.append("\"" + vg.getData(i) + " \" \n");
+    	}
+ 
+    	
+    	return sb.toString();
+    }
+    
+    public String entete() {
+    	StringBuilder s = new StringBuilder();
+    	s.append(".text\n");
+    	s.append("main :\n\n");
+    	s.append("# Declarations\n");
+		s.append("move $s7,$sp\n");
+		s.append("addi $sp,$sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n");
+    	return s.toString();
+    }
+    
+    public String fin() {
+    	StringBuilder s = new StringBuilder();
+    	s.append("\nend :\n");
+    	s.append("  move $v1, $v0\n");
+    	s.append("  li $v0, 10\n");
+    	s.append("  syscall\n");
+    	return s.toString();
+    }
 
     public static void main(String[] args) {
-        if (args.length != 1) {
+        /*if (args.length != 1) {
             System.err.println("Nombre incorrect d'arguments") ;
             System.err.println("\tjava -jar plic.jar <fichierSource.plic>") ;
             System.exit(1) ;
         }
-        new Plic(args[0]) ;
+        new Plic(args[0]) ;*/
+    	new Plic("test1.plic");
     }
     
 }

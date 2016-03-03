@@ -45,12 +45,6 @@ public class Different extends Comparaison {
 		return sb.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
-    
     
   
 }

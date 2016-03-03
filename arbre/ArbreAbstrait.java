@@ -11,7 +11,6 @@ public abstract class ArbreAbstrait {
     protected ArbreAbstrait() {
     }
     
-    public abstract void ajouter(ArbreAbstrait a);
     public abstract String toMips();
     	
 }

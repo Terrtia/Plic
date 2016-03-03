@@ -20,10 +20,5 @@ public class EcrireVar extends ArbreAbstrait{
 		return sb.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

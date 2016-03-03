@@ -18,8 +18,4 @@ public class EcrireExpression extends ArbreAbstrait{
 		return sb.toString();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		
-	}
 }

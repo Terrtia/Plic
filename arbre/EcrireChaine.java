@@ -19,11 +19,5 @@ public class EcrireChaine extends ArbreAbstrait {
 		sb.append("syscall\n");
 		return sb.toString();
 	}
-
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 

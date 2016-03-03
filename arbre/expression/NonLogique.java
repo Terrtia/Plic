@@ -40,10 +40,5 @@ public class NonLogique extends Unaire {
 		return expression.estBoolean();
 	}
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

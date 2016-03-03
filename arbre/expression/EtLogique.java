@@ -47,11 +47,4 @@ public class EtLogique extends BinaireLogique {
     	return gauche.estBoolean() && droite.estBoolean() && droite.verify() && gauche.verify();
     }
 
-	@Override
-	public void ajouter(ArbreAbstrait a) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }
