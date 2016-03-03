@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
+
 /**
  * 3 déc. 2015
  *
@@ -27,6 +29,7 @@ public class ConstanteBool extends Constante {
 		sb.append("\n");
 		return sb.toString();
 	}
+
 	
 
 }

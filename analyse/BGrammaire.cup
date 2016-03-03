@@ -45,8 +45,8 @@ parser code {:
             }
             
             if (s.value != null) {
-                lesTerminaux.put(CodesLexicaux.CSTEINT, "" + s.value) ;
-                lesTerminaux.put(CodesLexicaux.CSTEBOOL, "" + s.value) ;
+                lesTerminaux.put(CodesLexicaux.CONSTANTEINT, "" + s.value) ;
+                lesTerminaux.put(CodesLexicaux.CONSTANTEBOOL, "" + s.value) ;
             }
 
             if (lesTerminaux.containsKey(new Integer(s.sym))) {
@@ -69,22 +69,18 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, VIRGULE ;
+terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, CLASS,ECR,FIN, VIRGULE ;
 terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON;
-terminal String    IDF,CSTEINT, CSTEBOOL, CSTECHAINE;
-terminal String    CLASS, FIN, ENTIER, DEBUT, POUR, TANTQUE, REPETER, FINTANTQUE, SI, ALORS, SINON, FSI, LIR, ECRIR;
-//terminal String    PUBLIQUE, PRIVEE
-terminal String    TYPE,STATUT;   
+terminal String 	IDF,TYPE,STATUT,CONSTANTEINT, CONSTANTEBOOL;
    
 /* Non terminals used in the grammar section.  */
 
+non terminal ArbreAbstrait PROG ;
 non terminal Expression EXPR, CSTE ;
 
-non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST, LINSTRUCTION;
-non terminal ArbreAbstrait DECL_VAR, INSTRUCTION, AFFECT, BOUCLE, CONDITION, LIRE, ECRIRE;
+non terminal ArbreAbstrait SYSTEME, CLASSE, INSTRUCTION, AFFECT, ECRIRE, LDECL, DECLARATION, DECL_CONST, DECL_CHAMP;
+non terminal String ACCES;
 non terminal ArrayList<String> LIDF;
-/*non terminal String TYPE, STATUT; marche pas pour l'instant avec cette méthode */
-non terminal Acces ACCES;
 
 precedence left INF, SUP ;
 precedence left EGALEGAL, DIFF;
@@ -96,221 +92,14 @@ precedence left NON ;
 
 /* ----------------------------Grammar Section-------------------- */
  
+//start with PROG ;
 start with SYSTEME ;
 
-SYSTEME		::=	LCLASSE:lc
-			{: 
-			   RESULT = lc; 
-			:}
-			;
-
-LCLASSE		::=	LCLASSE:lc CLASSE:c
-			{:
-		   	   ((BlocDInstructions)lc).ajouter(c);
-		  	   RESULT = lc;
-			:}
-		|	
-			CLASSE:c
-			{: 
-			   ArbreAbstrait lc = new BlocDInstructions();
-		   	   ((BlocDInstructions)lc).ajouter(c);
-		           RESULT = lc;
-			:}
-			;
-
-CLASSE		::=	CLASS IDF FIN
-			{:
-		   	   //la classe est vide (optimisation en ne faisant qu'une entree/sortie de bloc ?)
-			:}
-		|	
-			CLASS IDF LDECLARATION:ld FIN
-			{:
-		   	   RESULT = ld;
-			:}
-			;
-
-LDECLARATION	::=	LDECLARATION:ld DECLARATION:d
-			{:
-		   	   ((BlocDInstructions)ld).ajouter(d);
-		  	   RESULT = ld;
-			:}
-		|	
-			DECLARATION:d
-			{: 
-			   ArbreAbstrait ld = new BlocDInstructions();
-		   	   ((BlocDInstructions)ld).ajouter(d);
-		       RESULT = ld;
-			:}
-			;
-
-DECLARATION 	::=	DECL_CHAMP:dc
-			{:
-		  	   RESULT = dc;
-			:}
-		|	
-			DECL_CONST:dc
-			{:
-		  	   RESULT = dc;
-			:}
-			;
-
-LIDF ::= IDF:i
-		{: ArrayList<String> lidf = new ArrayList<String>();
-		lidf.add(i);
-		RESULT = lidf; :}
-		|LIDF:lidf VIRGULE IDF:i
-		{: lidf.add(i);
-		RESULT = lidf; :}
-;
-
-DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n POINTVIRGULE
-				{: System.out.println("decl_champ " + s + " " + t + " " + n); 
-				BlocDInstructions l = new BlocDInstructions();
-				for(String nidf : n) {
-					l.ajouter(new Declaration(nidf,t,s));
-				}
-				RESULT = l; :}
-;
-
-/*TYPE		::=	ENTIER:e
-			{:
-			   RESULT = e;
-			:}
-		|	
-			IDF:i
-			{:
-			   RESULT = i;
-			:}
-			;*/
-
-DECL_CONST	::=	INSTRUCTION:i
-			{: //valable uniquement pour plic1/2 
-			   RESULT = i;
-			:}
-			;
-
-LINSTRUCTION	::=	LINSTRUCTION:li INSTRUCTION:i
-			{:
-		   	   ((BlocDInstructions)li).ajouter(i);
-		  	   RESULT = li;
-			:}
-		|	
-			INSTRUCTION:i
-			{:
-			   ArbreAbstrait li = new BlocDInstructions();
-		   	   ((BlocDInstructions)li).ajouter(i);
-		   	   RESULT = li;
-			:}
-			;
-
-DECL_VAR	::=	TYPE IDF POINTVIRGULE
-			{:
-			   //plic3 fct
-			:}
-		|	
-			TYPE IDF LIDF POINTVIRGULE
-			{:
-			   //plic3 fct
-			:}
-			;
-
-/*STATUT		::=	PUBLIQUE:p
-			{:
-			   RESULT = p;
-			:}
-		|	PRIVEE:p
-			{:
-			   RESULT = p;
-			:}
-			;*/
-
-INSTRUCTION	::=	AFFECT:a
-			{:
-			   RESULT = a; 
-			:}
-		|	
-			BOUCLE
-			{:
-			   //plic2
-			:}
-		|	
-			CONDITION
-			{:
-			   //plic2
-			:}
-		|	
-			LIRE:l
-			{:
-			   RESULT = l;
-			:}
-		|	
-			ECRIRE:e
-			{:
-			   RESULT = e;
-			:}
-			;
-
-AFFECT		::=	IDF:i EGAL EXPR:e POINTVIRGULE
-			{:
-			   System.out.println(i+" prend " +e);
-			   RESULT = new Affectation(e, i);
-			:}
-			;
-
-ACCES		::=	IDF:i
-			{:
-			   RESULT = new Acces(i);;
-			:}
-			;
-
-BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION PARFER DEBUT LINSTRUCTION FIN
-			{:
-			   //plic2
-			:}
-		|	
-			TANTQUE EXPR REPETER LINSTRUCTION FINTANTQUE
-			{:
-			   //plic2
-			:}
-			;
-
-CONDITION	::=	SI EXPR ALORS FSI
-			{:
-			   //plic2
-			:}
-		|	
-			SI EXPR ALORS LINSTRUCTION FSI
-			{:
-			   //plic2
-			:}
-		|  	
-			SI EXPR ALORS SINON LINSTRUCTION FSI
-			{:
-			   //plic2
-			:}
-		|  	
-			SI EXPR ALORS LINSTRUCTION SINON LINSTRUCTION FSI
-			{:
-			   //plic2
-			:}
-			;
-
-LIRE		::=	LIR IDF
-			{:
-			   //a implemanter
-			:}
-			;
-
-ECRIRE		::=	ECRIR EXPR:e POINTVIRGULE
-			{:
-			   RESULT = new EcrireExpression(e);
-			:}
-		|	ECRIR CSTECHAINE:c POINTVIRGULE
-			{: 
-			   RESULT = new EcrireChaine(c);
-			:}
-			;
-
+PROG    ::=     EXPR:e 
+                {: BlocDInstructions arbre = new BlocDInstructions() ;
+                   arbre.ajouter(e) ;
+                   RESULT = arbre ; :}
+                ;
     
 EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 {: RESULT = new Plus(g, d) ; :}
@@ -347,23 +136,94 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
         |      
                 NON EXPR:e
                 {: RESULT = new NonLogique(e); :}
-        |		
-        		ACCES:a
-        		{: RESULT = a; :}
         |
                 CSTE:c
                 {: RESULT = c ; :}
+        |		
+        		ACCES:a
+        		{: RESULT = a; :}
+        
         |
                 PAROUV  EXPR:e  PARFER
                 {: RESULT = e ; :}
                 ;
 
-CSTE    ::=     CSTEINT:e 
+CSTE    ::=     CONSTANTEINT:e 
                 {: RESULT = new ConstanteEntiere(e) ; :}
-        |       
-		CSTEBOOL:e 
+        |       CONSTANTEBOOL:e 
                 {: RESULT = new ConstanteBool(e) ; :}
                 ;
 
+SYSTEME ::= CLASSE:c
+			{: RESULT = c; :}
+;
 
+
+CLASSE ::= CLASS IDF LDECL:d FIN
+			{: RESULT = d; :}
+;
+
+DECLARATION ::= DECL_CHAMP:d POINTVIRGULE
+				{: RESULT = d; :}
+		|	DECL_CONST:d	POINTVIRGULE
+		 {: RESULT = d; :}
+;
+
+LDECL ::= DECLARATION:d
+		{: BlocDInstructions l = new BlocDInstructions();
+			l.ajouter(d);
+			RESULT = l; :}
+		|LDECL:l DECLARATION:d
+		{: ((BlocDInstructions)l).ajouter(d);
+			RESULT = l; :}
+		;
+
+
+LIDF ::= IDF:i
+		{: System.out.println("lidf"); 
+		ArrayList<String> lidf = new ArrayList<String>();
+		lidf.add(i);
+		RESULT = lidf; :}
+		|LIDF:lidf VIRGULE IDF:i
+		{: lidf.add(i);
+		RESULT = lidf; :}
+;
+
+DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n
+				{: System.out.println("decl_champ " + s + " " + t + " " + n); 
+				BlocDInstructions l = new BlocDInstructions();
+				for(String nidf : n) {
+					l.ajouter(new Declaration(nidf,t,s));
+				}
+				RESULT = l; :}
+;
+
+
+DECL_CONST ::= INSTRUCTION:i
+			{: BlocDInstructions l = new BlocDInstructions();
+			l.ajouter(i);
+			RESULT = l; :}
+			|DECL_CONST:l INSTRUCTION:i 
+			{: ((BlocDInstructions)l).ajouter(i);
+				RESULT = l; :}
+;
+
+INSTRUCTION ::=	AFFECT:a
+				{: RESULT = a; :}
+			|	ECRIRE:e
+			{: RESULT = e; :}
+;
+
+AFFECT ::= ACCES:a EGAL EXPR:expr
+{: System.out.println(a+" prend " +expr); :}
+
+;
+
+ACCES ::= IDF:i
+{: System.out.println(i); :}
+;
+
+ECRIRE ::= ECR EXPR:e
+			{: RESULT = new EcrireExpression(e); :}
+;
 

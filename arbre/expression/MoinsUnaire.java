@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -41,5 +42,6 @@ public class MoinsUnaire extends Unaire {
 	public boolean verify() {
 		return expression.estEntier();
 	}
+
 
 }

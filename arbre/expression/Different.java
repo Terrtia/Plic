@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -43,7 +44,7 @@ public class Different extends Comparaison {
 		}
 		return sb.toString();
 	}
-    
+
     
   
 }

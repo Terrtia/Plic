@@ -1,6 +1,5 @@
-package plic.arbre.expression;
+package plic.arbre;
 
-import plic.arbre.ArbreAbstrait;
 import plic.tds.TDS;
 import plic.tds.entrees.EntreeVar;
 import plic.tds.symboles.SymboleVar;

@@ -1,5 +1,7 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
+
 /**
  * 3 déc. 2015
  *
@@ -36,5 +38,6 @@ public class Mult extends BinaireArithmetique {
 		s.append("\n");
 		return s.toString();
 	}
+
 
 }

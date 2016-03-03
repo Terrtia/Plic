@@ -1,11 +1,11 @@
 package plic.arbre;
 import plic.VariablesGlobales;
-import plic.arbre.expression.Expression;
 import plic.tds.TDS;
 
-public class EcrireChaine {
+public class EcrireChaine extends ArbreAbstrait {
 	private TDS tds;
 	private String message ;
+	private int index;
 		
 	public EcrireChaine(String mess){
 		message = mess;
@@ -14,7 +14,7 @@ public class EcrireChaine {
 		
 	public String toMips(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("la $a0 \n");
+		sb.append("la $a0 str"+index+" \n");
 		sb.append("li $v0, 4\n");
 		sb.append("syscall\n");
 		return sb.toString();

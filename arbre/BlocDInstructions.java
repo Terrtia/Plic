@@ -43,7 +43,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     	VariablesGlobales vg = VariablesGlobales.getInstance();
     	for(int i = 0;i < vg.getDataSize();i++){
     		sb.append("str"+i+" : .asciiz ");
-    		sb.append("\"" + vg.getData(i) + " \" \n");
+    		sb.append(vg.getData(i) + "\n");
     	}
  
     	

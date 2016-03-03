@@ -1,5 +1,6 @@
 package plic.arbre.expression;
 
+import plic.arbre.ArbreAbstrait;
 import plic.exceptions.AnalyseSemantiqueException;
 
 /**
@@ -38,5 +39,6 @@ public class NonLogique extends Unaire {
 	public boolean verify() {
 		return expression.estBoolean();
 	}
+
 
 }
