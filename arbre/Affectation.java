@@ -9,13 +9,14 @@ public class Affectation extends ArbreAbstrait{
 	private String gauche;
 	
 	public Affectation(Expression droite,String gauche){
+		super();
 		this.droite = droite;
 		this.gauche = gauche;
 	}
 	
 	public String toMips(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("# Affectation\n");
+		sb.append("# Affectation de " + gauche + "\n");
 		sb.append(droite.toMips());
 		sb.append("\n");
 		int decalage = TDS.getInstance().identifier(new EntreeVar(gauche)).getDep();

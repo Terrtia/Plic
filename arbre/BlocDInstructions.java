@@ -1,5 +1,7 @@
 package plic.arbre;
 
+import java.util.ArrayList;
+
 import plic.VariablesGlobales;
 import plic.tds.TDS;
 
@@ -12,25 +14,30 @@ import plic.tds.TDS;
 
 public class BlocDInstructions extends ArbreAbstrait {
     
-	//protected ArrayList<ArbreAbstrait> arbre;
+	protected ArrayList<ArbreAbstrait> lesArbres;
     protected ArbreAbstrait expr ;
     
     
     public BlocDInstructions() {
         super();
-		//this.arbre = new ArrayList<>();
+        lesArbres = new ArrayList<ArbreAbstrait>();
     }
     
     public void ajouter(ArbreAbstrait a) {
-        expr = a ;
-        //this.arbre.add(a);
+        //expr = a ;
+        this.lesArbres.add(a);
     }
     
     public String toString() {
-        return expr.toString() ;
+        //return expr.toString() ;
+        StringBuilder str = new StringBuilder();
+		for(ArbreAbstrait a : lesArbres) {
+			str.append(a.toMips());
+		}
+		return str.toString();
     }
 
-    public String data(){
+	/*public String data(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(".data\n");
     	VariablesGlobales vg = VariablesGlobales.getInstance();
@@ -60,15 +67,16 @@ public class BlocDInstructions extends ArbreAbstrait {
     	s.append("  li $v0, 10\n");
     	s.append("  syscall\n");
     	return s.toString();
-    }
+    }*/
     
     @Override
 	public String toMips() {
-    	String codeMips = expr.toMips();
+    	//String codeMips = expr.toMips();
 		//for(ArbreAbstrait a: arbre) {
 		//	codeMips = codeMips + a.toMips();
 		//}
-    	return this.data()+this.entete() + codeMips + this.fin();
+    	//return this.data()+this.entete() + toString() + this.fin();
+    	return toString();
 	}
 
 }

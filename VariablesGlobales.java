@@ -2,6 +2,8 @@ package plic;
 
 import java.util.ArrayList;
 
+import plic.tds.TDS;
+
 public class VariablesGlobales {
 
 	private static VariablesGlobales instance = new VariablesGlobales();
@@ -36,4 +38,5 @@ public class VariablesGlobales {
 	public int getDataSize() {
 		return dataString.size();
 	}
+	
 }
