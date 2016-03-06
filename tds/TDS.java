@@ -33,7 +33,7 @@ public class TDS {
 	
 	public void ajouter(Entree e, Symbole s) {
 		dico.ajouter(e, s);
-		System.out.println(toString());
+		//System.out.println(toString());
 	}
 	
 	public Symbole identifier(Entree e) {

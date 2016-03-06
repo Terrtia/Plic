@@ -56,7 +56,7 @@ public class Plic {
     	VariablesGlobales vg = VariablesGlobales.getInstance();
     	for(int i = 0;i < vg.getDataSize();i++){
     		sb.append("str"+i+" : .asciiz ");
-    		sb.append("\"" + vg.getData(i) + " \" \n");
+    		sb.append(vg.getData(i) + " \n");
     	}
  
     	
@@ -83,13 +83,12 @@ public class Plic {
     }
 
     public static void main(String[] args) {
-        /*if (args.length != 1) {
+        if (args.length != 1) {
             System.err.println("Nombre incorrect d'arguments") ;
             System.err.println("\tjava -jar plic.jar <fichierSource.plic>") ;
             System.exit(1) ;
         }
-        new Plic(args[0]) ;*/
-    	new Plic("test1.plic");
+        new Plic(args[0]) ;
     }
     
 }

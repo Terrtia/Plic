@@ -73,8 +73,8 @@ terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, VI
 terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON;
 terminal String    IDF,CSTEINT, CSTEBOOL, CSTECHAINE;
 terminal String    CLASS, FIN, ENTIER, DEBUT, POUR, TANTQUE, REPETER, FINTANTQUE, SI, ALORS, SINON, FSI, LIR, ECRIR;
-//terminal String    PUBLIQUE, PRIVEE
-terminal String    TYPE,STATUT;   
+terminal String    PUBLIQUE, PRIVEE;
+/*terminal String    TYPE,STATUT;*/   
    
 /* Non terminals used in the grammar section.  */
 
@@ -83,7 +83,7 @@ non terminal Expression EXPR, CSTE ;
 non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST, LINSTRUCTION;
 non terminal ArbreAbstrait DECL_VAR, INSTRUCTION, AFFECT, BOUCLE, CONDITION, LIRE, ECRIRE;
 non terminal ArrayList<String> LIDF;
-/*non terminal String TYPE, STATUT; marche pas pour l'instant avec cette méthode */
+non terminal String TYPE, STATUT; 
 non terminal Acces ACCES;
 
 precedence left INF, SUP ;
@@ -164,7 +164,7 @@ LIDF ::= IDF:i
 ;
 
 DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n POINTVIRGULE
-				{: System.out.println("decl_champ " + s + " " + t + " " + n); 
+				{: 
 				BlocDInstructions l = new BlocDInstructions();
 				for(String nidf : n) {
 					l.ajouter(new Declaration(nidf,t,s));
@@ -252,7 +252,6 @@ INSTRUCTION	::=	AFFECT:a
 
 AFFECT		::=	IDF:i EGAL EXPR:e POINTVIRGULE
 			{:
-			   System.out.println(i+" prend " +e);
 			   RESULT = new Affectation(e, i);
 			:}
 			;

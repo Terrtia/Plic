@@ -36,8 +36,7 @@ csteC = \"[a-zA-Z0-9]*\"
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
-statut = "privee" | "publique"
-type = "entier"
+
 
 idf = [a-zA-Z][a-zA-Z0-9]*
 
@@ -70,12 +69,12 @@ idf = [a-zA-Z][a-zA-Z0-9]*
 "debut"            	{ return symbol(CodesLexicaux.DEBUT); }
 "fin"             	{ return symbol(CodesLexicaux.FIN); }
 
-{statut}		{return symbol(CodesLexicaux.STATUT,yytext());}
-{type}			{return symbol(CodesLexicaux.TYPE,yytext());}
-/*"publique"              { return symbol(CodesLexicaux.PUBLIQUE); }
+//{statut}		{return symbol(CodesLexicaux.STATUT,yytext());}
+//{type}			{return symbol(CodesLexicaux.TYPE,yytext());}
+"publique"              { return symbol(CodesLexicaux.PUBLIQUE); }
 "privee"                { return symbol(CodesLexicaux.PRIVEE); }
 
-"entier"                { return symbol(CodesLexicaux.ENTIER); }*/
+"entier"                { return symbol(CodesLexicaux.ENTIER); }
 
 "pour"                  { return symbol(CodesLexicaux.POUR); }
 "tantque"               { return symbol(CodesLexicaux.TANTQUE); }
