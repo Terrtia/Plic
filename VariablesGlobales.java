@@ -10,10 +10,14 @@ public class VariablesGlobales {
 	
 	private int numeroBloc;
 	private ArrayList<String> dataString;
+	private int si;
+	private int boucle;
 	
 	private VariablesGlobales() {
 		numeroBloc = -1;
 		dataString = new ArrayList<>();
+		si = 0;
+		boucle = 0;
 	}
 	
 	public static VariablesGlobales getInstance() {
@@ -38,5 +42,18 @@ public class VariablesGlobales {
 	public int getDataSize() {
 		return dataString.size();
 	}
+
+	public void addSi() {
+		si++;		
+	}
+	public int getSi(){
+		return si;
+	}
 	
+	public void addBoucle() {
+		boucle++;		
+	}
+	public int getBoucle(){
+		return boucle;
+	}
 }
