@@ -69,21 +69,21 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, EGAL,POINTVIRGULE, VIRGULE ;
+terminal Symbol    PLUS, MOINS, MULT, DIV, PAROUV, PARFER, CROOUV, CROFER, EGAL,POINTVIRGULE, VIRGULE ;
 terminal Symbol    SUP, INF, EGALEGAL, DIFF, ET, OU, NON;
 terminal String    IDF,CSTEINT, CSTEBOOL, CSTECHAINE;
-terminal String    CLASS, FIN, ENTIER, DEBUT, POUR, TANTQUE, REPETER, FINTANTQUE, SI, ALORS, SINON, FSI, LIR, ECRIR;
+terminal String    CLASS, FIN, ENTIER, DEBUT, NOUVEAU, POUR, TANTQUE, REPETER, FINTANTQUE, SI, ALORS, SINON, FSI, LIR, ECRIR;
 terminal String    PUBLIQUE, PRIVEE;
-/*terminal String    TYPE,STATUT;*/   
+  
    
 /* Non terminals used in the grammar section.  */
 
 non terminal Expression EXPR, CSTE ;
 
-non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST, LINSTRUCTION;
-non terminal ArbreAbstrait DECL_VAR, INSTRUCTION, AFFECT, BOUCLE, CONDITION, LIRE, ECRIRE;
+non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST , DECL_FONCTION;
+non terminal ArbreAbstrait LDECL_VAR, DECL_VAR,LINSTRUCTION, INSTRUCTION, AFFECT, INSTANCIATION, BOUCLE, CONDITION, LIRE, ECRIRE;
 non terminal ArrayList<String> LIDF;
-non terminal String TYPE, STATUT; 
+non terminal String TYPE, TYPE_RES, STATUT; 
 non terminal Acces ACCES;
 
 precedence left INF, SUP ;
@@ -152,15 +152,25 @@ DECLARATION 	::=	DECL_CHAMP:dc
 			{:
 		  	   RESULT = dc;
 			:}
+		|
+			DECL_FONCTION:df
+			{:
+		  	   RESULT = df;
+			:}
 			;
 
 LIDF ::= IDF:i
-		{: ArrayList<String> lidf = new ArrayList<String>();
-		lidf.add(i);
-		RESULT = lidf; :}
-		|LIDF:lidf VIRGULE IDF:i
-		{: lidf.add(i);
-		RESULT = lidf; :}
+		{:
+		   ArrayList<String> lidf = new ArrayList<String>();
+		   lidf.add(i);
+		   RESULT = lidf; 
+		:}
+		|
+		LIDF:lidf VIRGULE IDF:i
+		{: 
+		   lidf.add(i);
+		   RESULT = lidf; 
+		:}
 ;
 
 DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n POINTVIRGULE
@@ -177,15 +187,25 @@ TYPE		::=	ENTIER:e
 			   RESULT = e;
 			:}
 		|	
+			ENTIER:e CROOUV CROFER
+			{:
+			   RESULT = e;
+			:}
+		|
 			IDF:i
 			{:
 			   RESULT = i;
 			:}
 			;
 
-DECL_CONST	::=	INSTRUCTION:i
-			{: //valable uniquement pour plic1/2 
-			   RESULT = i;
+DECL_CONST	::=	STATUT:s IDF:i DEBUT LINSTRUCTION:li FIN
+			{:  
+			   // a implementer
+			:}
+		|
+			STATUT:s IDF:i DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
+			{:  
+			   // a implementer
 			:}
 			;
 
@@ -203,6 +223,20 @@ LINSTRUCTION	::=	LINSTRUCTION:li INSTRUCTION:i
 			:}
 			;
 
+LDECL_VAR	::=	LDECL_VAR:lv DECL_VAR:v
+			{:
+		   	   ((BlocDInstructions)lv).ajouter(v);
+		  	   RESULT = lv;
+			:}
+		|	
+			DECL_VAR:v
+			{: 
+			   ArbreAbstrait lv = new BlocDInstructions();
+		   	   ((BlocDInstructions)lv).ajouter(v);
+		           RESULT = lv;
+			:}
+			;
+
 DECL_VAR	::=	TYPE IDF POINTVIRGULE
 			{:
 			   //plic3 fct
@@ -211,6 +245,28 @@ DECL_VAR	::=	TYPE IDF POINTVIRGULE
 			TYPE IDF LIDF POINTVIRGULE
 			{:
 			   //plic3 fct
+			:}
+			;
+
+DECL_FONCTION	::=	STATUT:s TYPE_RES IDF:i DEBUT LINSTRUCTION:li FIN
+			{:  
+			   // a implementer
+			:}
+		|
+			STATUT:s TYPE_RES IDF:i DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
+			{:  
+			   // a implementer
+			:}
+			;
+
+TYPE_RES	::=	ENTIER:e
+			{:  
+			   RESULT = e;
+			:}
+		|
+			IDF:i
+			{:  
+			   RESULT = i;
 			:}
 			;
 
@@ -227,6 +283,11 @@ STATUT		::=	PUBLIQUE:p
 INSTRUCTION	::=	AFFECT:a
 			{:
 			   RESULT = a; 
+			:}
+		|
+			INSTANCIATION:i
+			{:
+			   RESULT = i; 
 			:}
 		|	
 			BOUCLE
@@ -250,9 +311,15 @@ INSTRUCTION	::=	AFFECT:a
 			:}
 			;
 
-AFFECT		::=	IDF:i EGAL EXPR:e POINTVIRGULE
+AFFECT		::=	ACCES:a EGAL EXPR:e POINTVIRGULE
 			{:
-			   RESULT = new Affectation(e, i);
+			   RESULT = new Affectation(e, a);
+			:}
+			;
+
+INSTANCIATION	::=	ACCES EGAL NOUVEAU IDF PAROUV PARFER
+			{:
+			   // a implementer
 			:}
 			;
 
