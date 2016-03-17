@@ -418,8 +418,8 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 NON EXPR:e
                 {: RESULT = new NonLogique(e); :}
         |		
-        	ACCES:a
-        	{: RESULT = a; :}
+        	IDF:i
+        	{: RESULT = i; :}
         |
                 CSTE:c
                 {: RESULT = c ; :}
