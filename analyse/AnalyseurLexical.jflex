@@ -43,7 +43,7 @@ idf = [a-zA-Z][a-zA-Z0-9]*
 
 %%
 
-<YYINITIAL>{commentaireSlashSlash}  {}
+{commentaireSlashSlash}  { }
 
 "+"                	{ return symbol(CodesLexicaux.PLUS); }
 "-"                	{ return symbol(CodesLexicaux.MOINS); }

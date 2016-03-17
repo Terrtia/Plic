@@ -14,17 +14,25 @@ public class Condition extends ArbreAbstrait {
 		this.sinon = sinon;
 	}
 	
-	public String toMips() {
+	public String toMips() {	
+		
 		VariablesGlobales.getInstance().addSi();
 		int nbSi = VariablesGlobales.getInstance().getSi();
 		StringBuilder sb = new StringBuilder();
-		sb.append("si"+nbSi+" :		"+condition.toMips()+"\n");
-		sb.append("beqz $v0,sinon"+nbSi+"\n");
-		sb.append("alors"+nbSi+" :	"+alors.toMips()+"\n");
-		sb.append("b finsi"+nbSi+"\n");
-		sb.append("sinon"+nbSi+" : 	  "+sinon.toMips()+"\n");
-		sb.append("finsi"+nbSi+":\n");
-		return null;
+		
+		sb.append("\nsi" + nbSi + " :		\n\n" + condition.toMips() );
+		sb.append("beqz $v0,sinon" + nbSi + "\n\n");
+		sb.append("alors" + nbSi + " :	\n\n" + alors.toMips() );
+		sb.append("b finsi" + nbSi + "\n\n");
+		sb.append("sinon" + nbSi + " : 	  \n\n" + sinon.toMips() );
+		sb.append("finsi" + nbSi + ":\n\n");
+		return sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return "Condition [condition=" + condition + ", alors=" + alors
+				+ ", sinon=" + sinon + "]";
 	}
 
 }

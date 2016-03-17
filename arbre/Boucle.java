@@ -4,6 +4,7 @@ import plic.VariablesGlobales;
 import plic.arbre.expression.Expression;
 
 public class Boucle extends ArbreAbstrait{
+	
 	private BlocDInstructions iter;
 	private Expression condition;
 	
@@ -11,6 +12,11 @@ public class Boucle extends ArbreAbstrait{
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "Boucle [iter=" + iter + ", condition=" + condition + "]";
+	}
+
 	public String toMips() {
 		VariablesGlobales.getInstance().addBoucle();
 		int nbBoucle = VariablesGlobales.getInstance().getBoucle();

@@ -19,5 +19,11 @@ public class EcrireChaine extends ArbreAbstrait {
 		sb.append("syscall\n");
 		return sb.toString();
 	}
+
+	@Override
+	public String toString() {
+		return "EcrireChaine [tds=" + tds + ", message=" + message + ", index="
+				+ index + "]";
+	}
 }
 

@@ -12,5 +12,7 @@ public abstract class ArbreAbstrait {
     }
     
     public abstract String toMips();
+    
+    public abstract String toString();
     	
 }

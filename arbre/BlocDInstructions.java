@@ -2,9 +2,6 @@ package plic.arbre;
 
 import java.util.ArrayList;
 
-import plic.VariablesGlobales;
-import plic.tds.TDS;
-
 
 /**
  * 3 déc. 2015
@@ -28,13 +25,12 @@ public class BlocDInstructions extends ArbreAbstrait {
         this.lesArbres.add(a);
     }
     
-    public String toString() {
-        //return expr.toString() ;
-        StringBuilder str = new StringBuilder();
-		for(ArbreAbstrait a : lesArbres) {
-			str.append(a.toMips());
-		}
-		return str.toString();
+    public String toMips() {
+    	StringBuilder str = new StringBuilder();
+    	for(ArbreAbstrait a : lesArbres) {
+    		str.append(a.toMips());
+    	}
+    	return str.toString();
     }
 
 	/*public String data(){
@@ -69,14 +65,23 @@ public class BlocDInstructions extends ArbreAbstrait {
     	return s.toString();
     }*/
     
-    @Override
-	public String toMips() {
+    //@Override
+	//public String toMips() {
     	//String codeMips = expr.toMips();
 		//for(ArbreAbstrait a: arbre) {
 		//	codeMips = codeMips + a.toMips();
 		//}
     	//return this.data()+this.entete() + toString() + this.fin();
-    	return toString();
+    	//return toString();
+	//}:
+		    
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		for(ArbreAbstrait a : lesArbres) {
+			System.out.println(a.toString());
+			//str.append(a.toString());
+		}
+		return str.toString();
 	}
 
 }

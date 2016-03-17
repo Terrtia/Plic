@@ -234,9 +234,9 @@ INSTRUCTION	::=	AFFECT:a
 			   //plic2
 			:}
 		|	
-			CONDITION
+			CONDITION:c
 			{:
-			   //plic2
+			   RESULT = c;
 			:}
 		|	
 			LIRE:l
@@ -276,21 +276,25 @@ BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION
 CONDITION	::=	SI EXPR ALORS FSI
 			{:
 			   //plic2
+			   System.out.println("vide");
 			:}
 		|	
 			SI EXPR ALORS LINSTRUCTION FSI
 			{:
 			   //plic2
+				System.out.println("vide");
 			:}
 		|  	
 			SI EXPR ALORS SINON LINSTRUCTION FSI
 			{:
 			   //plic2
+				System.out.println("vide");
 			:}
 		|  	
-			SI EXPR ALORS LINSTRUCTION SINON LINSTRUCTION FSI
+			SI EXPR:e ALORS LINSTRUCTION:li1 SINON LINSTRUCTION:li2 FSI
 			{:
-			   //plic2
+			   Condition c = new Condition(e, (BlocDInstructions)li1, (BlocDInstructions)li2);
+			   RESULT = c;
 			:}
 			;
 
@@ -347,8 +351,8 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 NON EXPR:e
                 {: RESULT = new NonLogique(e); :}
         |		
-        		ACCES:a
-        		{: RESULT = a; :}
+        	ACCES:a
+        	{: RESULT = a; :}
         |
                 CSTE:c
                 {: RESULT = c ; :}

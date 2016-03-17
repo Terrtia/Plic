@@ -2,8 +2,6 @@ package plic;
 
 import java.util.ArrayList;
 
-import plic.tds.TDS;
-
 public class VariablesGlobales {
 
 	private static VariablesGlobales instance = new VariablesGlobales();
@@ -11,6 +9,7 @@ public class VariablesGlobales {
 	private int numeroBloc;
 	private ArrayList<String> dataString;
 	private int si;
+	private StringBuilder condition;
 	private int boucle;
 	
 	private VariablesGlobales() {
@@ -35,6 +34,7 @@ public class VariablesGlobales {
 	public void addData(String str){
 		dataString.add(str);
 	}
+	
 	public String getData(int i){
 		return dataString.get(i);
 	}
@@ -46,8 +46,17 @@ public class VariablesGlobales {
 	public void addSi() {
 		si++;		
 	}
+	
 	public int getSi(){
 		return si;
+	}
+	
+	public void addCondition(String Condition) {
+		this.condition.append(Condition);
+	}
+	
+	public String getCondition() {
+		return this.condition.toString();
 	}
 	
 	public void addBoucle() {
