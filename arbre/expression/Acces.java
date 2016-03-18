@@ -11,6 +11,10 @@ public class Acces extends Expression {
 		idf = i;
 	}
 	
+	public String getIdf() {
+		return idf;
+	}
+	
 	public boolean estEntier() {
 		return true;
 	}

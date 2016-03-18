@@ -81,7 +81,7 @@ terminal String    PUBLIQUE, PRIVEE;
 non terminal Expression EXPR, CSTE ;
 
 non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST , DECL_FONCTION;
-non terminal ArbreAbstrait PARAMETRES/*, LTYPE*/;
+non terminal ArbreAbstrait PARAMETRES;
 non terminal ArbreAbstrait LDECL_VAR, DECL_VAR,LINSTRUCTION, INSTRUCTION, AFFECT, INSTANCIATION, BOUCLE, CONDITION, LIRE, ECRIRE;
 non terminal ArrayList<String> LIDF;
 non terminal String TYPE, TYPE_RES, STATUT; 
@@ -346,7 +346,7 @@ INSTRUCTION	::=	AFFECT:a
 
 AFFECT		::=	ACCES:a EGAL EXPR:e POINTVIRGULE
 			{:
-			   RESULT = new Affectation(e, a);
+			   RESULT = new Affectation(e, a.getIdf() );
 			:}
 			;
 
@@ -358,7 +358,7 @@ INSTANCIATION	::=	ACCES EGAL NOUVEAU IDF PAROUV PARFER
 
 ACCES		::=	IDF:i
 			{:
-			   RESULT = new Acces(i);;
+			   RESULT = new Acces(i);
 			:}
 			;
 
@@ -451,8 +451,8 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 NON EXPR:e
                 {: RESULT = new NonLogique(e); :}
         |		
-        	IDF:i
-        	{: RESULT = i; :}
+        	ACCES:a
+        	{: RESULT = a; :}
         |
                 CSTE:c
                 {: RESULT = c ; :}
