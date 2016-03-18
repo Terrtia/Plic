@@ -18,4 +18,9 @@ public class EcrireExpression extends ArbreAbstrait{
 		return sb.toString();
 	}
 
+	@Override
+	public String toString() {
+		return "EcrireExpression [message=" + message + "]";
+	}
+
 }

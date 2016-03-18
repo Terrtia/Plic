@@ -24,7 +24,7 @@ public class Plic {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(fichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
-            //System.err.println("expression stockée dans l'arbre : \n ---------\n" + arbre.toMips());
+            //System.err.println("expression stockée dans l'arbre : \n ---------\n" + arbre.toString());
             
             String nom;
             nom = fichier.substring(0, fichier.length()-5);
@@ -32,7 +32,7 @@ public class Plic {
             nom = nom + ".mips";
             
             FileOutputStream fos = new FileOutputStream(nom);
-            String mips = data()+entete()+arbre.toMips()+fin();
+            String mips = data() + entete() + arbre.toMips() + fin();
             fos.write(mips.getBytes());
             fos.close();
             

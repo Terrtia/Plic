@@ -20,5 +20,10 @@ public class EcrireVar extends ArbreAbstrait{
 		return sb.toString();
 	}
 
+	@Override
+	public String toString() {
+		return "EcrireVar [var=" + var + "]";
+	}
+
 
 }

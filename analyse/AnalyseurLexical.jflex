@@ -43,7 +43,7 @@ idf = [a-zA-Z][a-zA-Z0-9]*
 
 %%
 
-<YYINITIAL>{commentaireSlashSlash}  {}
+{commentaireSlashSlash}  { }
 
 "+"                	{ return symbol(CodesLexicaux.PLUS); }
 "-"                	{ return symbol(CodesLexicaux.MOINS); }
@@ -65,16 +65,19 @@ idf = [a-zA-Z][a-zA-Z0-9]*
 "("                	{ return symbol(CodesLexicaux.PAROUV); }
 ")"                	{ return symbol(CodesLexicaux.PARFER); }
 
+"["                	{ return symbol(CodesLexicaux.CROOUV); }
+"]"                	{ return symbol(CodesLexicaux.CROFER); }
+
 "classe"                { return symbol(CodesLexicaux.CLASS); }
 "debut"            	{ return symbol(CodesLexicaux.DEBUT); }
 "fin"             	{ return symbol(CodesLexicaux.FIN); }
 
-//{statut}		{return symbol(CodesLexicaux.STATUT,yytext());}
-//{type}			{return symbol(CodesLexicaux.TYPE,yytext());}
 "publique"              { return symbol(CodesLexicaux.PUBLIQUE); }
 "privee"                { return symbol(CodesLexicaux.PRIVEE); }
 
 "entier"                { return symbol(CodesLexicaux.ENTIER); }
+
+"nouveau"		{ return symbol(CodesLexicaux.NOUVEAU); }
 
 "pour"                  { return symbol(CodesLexicaux.POUR); }
 "tantque"               { return symbol(CodesLexicaux.TANTQUE); }

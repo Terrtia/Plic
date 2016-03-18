@@ -18,4 +18,9 @@ public class Declaration extends ArbreAbstrait {
 		return sb.toString();
 	}
 
+	@Override
+	public String toString() {
+		return "Declaration []";
+	}
+
 }
