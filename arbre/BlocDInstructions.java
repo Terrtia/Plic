@@ -85,6 +85,15 @@ public class BlocDInstructions extends ArbreAbstrait {
 		}
 		return str.toString();
 	}
+	
+	public boolean verify(){
+		boolean res = true;
+		for(ArbreAbstrait a : lesArbres) {
+			res = res && a.verify();
+		}
+		return res;
+		
+	}
 
 
 }

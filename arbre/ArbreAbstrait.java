@@ -14,5 +14,10 @@ public abstract class ArbreAbstrait {
     public abstract String toMips();
     
     public abstract String toString();
+
+	public boolean verify() {
+		// TODO Auto-generated method stub
+		return true;
+	}
     	
 }

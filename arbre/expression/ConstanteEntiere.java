@@ -12,6 +12,7 @@ public class ConstanteEntiere extends Constante {
     
     public ConstanteEntiere(String texte) {
         super(texte) ;
+        type = "entier";
     }
 
     public boolean estEntier() {

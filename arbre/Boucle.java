@@ -9,7 +9,8 @@ public class Boucle extends ArbreAbstrait{
 	private Expression condition;
 	
 	public Boucle(Expression condition,BlocDInstructions iter){
-		
+		this.condition = condition;
+		this.iter = iter;
 	}
 	
 	@Override
@@ -28,6 +29,12 @@ public class Boucle extends ArbreAbstrait{
 		sb.append("fintq"+nbBoucle+" : 		\n");
 		return sb.toString();
 		
+	}
+	
+	public boolean verify(){
+		boolean res = condition.verify() && condition.estBoolean();
+		res = res && iter.verify();
+		return res;
 	}
 
 }

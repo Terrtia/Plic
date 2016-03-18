@@ -13,6 +13,7 @@ public class MoinsUnaire extends Unaire {
     
     public MoinsUnaire(Expression expr) {
         super(expr);
+        type = "entier";
     }
 
     @Override

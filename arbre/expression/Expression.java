@@ -9,17 +9,21 @@ import plic.arbre.ArbreAbstrait;
  */
 
 public abstract class Expression extends ArbreAbstrait {
-    
+    protected String type;
+	
     protected Expression() {
         super() ;
     }
     
-
+    public String getType(){
+    	return type;
+    }
+    	
     protected boolean estConstante() {
     	return false;
     }
     
-    protected boolean estBoolean() {
+    public boolean estBoolean() {
     	return false;
     }
     

@@ -12,6 +12,7 @@ public abstract class BinaireArithmetique extends Binaire {
 
     protected BinaireArithmetique(Expression gauche, Expression droite) {
         super(gauche, droite);
+        type = "entier";
     }  
     
     public boolean estEntier() {

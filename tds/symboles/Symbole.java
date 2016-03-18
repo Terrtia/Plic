@@ -28,6 +28,11 @@ public abstract class Symbole {
 		// TODO Auto-generated method stub
 		return dep;
 	}
+
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
 	
 	/*public Symbole(String t, String s, int d) {
 		type = t;

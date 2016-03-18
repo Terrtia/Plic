@@ -9,6 +9,7 @@ public class Acces extends Expression {
 	
 	public Acces(String i) {
 		idf = i;
+		type =  TDS.getInstance().identifier(new EntreeVar(idf)).getType();
 	}
 	
 	public boolean estEntier() {

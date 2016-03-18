@@ -12,9 +12,10 @@ public class ConstanteBool extends Constante {
     
     public ConstanteBool(String texte) {
         super(texte) ;
+        type = "boolean";
     }
 
-    protected boolean estBoolean() {
+    public boolean estBoolean() {
     	return true;
     }
     
