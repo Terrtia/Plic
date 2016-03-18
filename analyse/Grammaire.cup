@@ -362,33 +362,36 @@ ACCES		::=	IDF:i
 			:}
 			;
 
-BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION PARFER DEBUT LINSTRUCTION FIN
+BOUCLE		::=	POUR PAROUV IDF:i EGAL EXPR:e POINTVIRGULE EXPR:e2 POINTVIRGULE INSTRUCTION:i PARFER DEBUT LINSTRUCTION:li FIN
 			{:
-			   //plic2
+			   BlocDInstructions bloc = new BlocDinstructions();
+			   bloc.add(new Affectation(e,i);
+			   li.add(i);
+			   bloc.add(new Boucle(e2,li);
+			   
 			:}
 		|	
-			TANTQUE EXPR REPETER LINSTRUCTION FINTANTQUE
+			TANTQUE EXPR:e REPETER LINSTRUCTION:l FINTANTQUE
 			{:
-			   //plic2
+			   RESULT = new Boucle(e,l);
 			:}
 			;
 
 CONDITION	::=	SI EXPR ALORS FSI
 			{:
-			   //plic2
-			   
+
 			:}
 		|	
-			SI EXPR ALORS LINSTRUCTION FSI
+			SI EXPR:e ALORS LINSTRUCTION:l FSI
 			{:
-			   //plic2
-				
+			   Condition c = new Condition(e, (BlocDInstructions)l, null);
+			   RESULT = c;
 			:}
 		|  	
-			SI EXPR ALORS SINON LINSTRUCTION FSI
+			SI EXPR:e ALORS SINON LINSTRUCTION:li1 FSI
 			{:
-			   //plic2
-				
+			   Condition c = new Condition(e, null,(BlocDInstructions)li1);
+			   RESULT = c;
 			:}
 		|  	
 			SI EXPR:e ALORS LINSTRUCTION:li1 SINON LINSTRUCTION:li2 FSI

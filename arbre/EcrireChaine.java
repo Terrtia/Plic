@@ -20,6 +20,8 @@ public class EcrireChaine extends ArbreAbstrait {
 		return sb.toString();
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "EcrireChaine [tds=" + tds + ", message=" + message + ", index="

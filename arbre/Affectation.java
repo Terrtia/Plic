@@ -24,9 +24,9 @@ public class Affectation extends ArbreAbstrait{
 	}
 	
 	public boolean verify(){
-		//String type = tds.identifier(gauche).getType();
-		String type = "entier";
-		return droite.estEntier() == (type.equals("entier"));
+		String type = TDS.getInstance().identifier(new EntreeVar(gauche)).getType();
+		//implmenter getType
+		return droite.getType().equals(type);
 	}
 
 	@Override
