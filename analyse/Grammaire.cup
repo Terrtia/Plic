@@ -323,9 +323,9 @@ INSTRUCTION	::=	AFFECT:a
 			   RESULT = i; 
 			:}
 		|	
-			BOUCLE
+			BOUCLE :b
 			{:
-			   //plic2
+			   RESULT = b;
 			:}
 		|	
 			CONDITION:c

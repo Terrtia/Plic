@@ -26,6 +26,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     }
     
     public String toMips() {
+
     	StringBuilder str = new StringBuilder();
     	for(ArbreAbstrait a : lesArbres) {
     		str.append(a.toMips());
@@ -65,6 +66,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     	return s.toString();
     }*/
     
+
     //@Override
 	//public String toMips() {
     	//String codeMips = expr.toMips();
@@ -83,5 +85,6 @@ public class BlocDInstructions extends ArbreAbstrait {
 		}
 		return str.toString();
 	}
+
 
 }

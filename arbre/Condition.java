@@ -14,6 +14,7 @@ public class Condition extends ArbreAbstrait {
 		this.sinon = sinon;
 	}
 	
+
 	public String toMips() {	
 		
 		VariablesGlobales.getInstance().addSi();
