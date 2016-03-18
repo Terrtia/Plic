@@ -81,6 +81,7 @@ terminal String    PUBLIQUE, PRIVEE;
 non terminal Expression EXPR, CSTE ;
 
 non terminal ArbreAbstrait SYSTEME, LCLASSE, CLASSE, LDECLARATION, DECLARATION, DECL_CHAMP, DECL_CONST , DECL_FONCTION;
+non terminal ArbreAbstrait PARAMETRES/*, LTYPE*/;
 non terminal ArbreAbstrait LDECL_VAR, DECL_VAR,LINSTRUCTION, INSTRUCTION, AFFECT, INSTANCIATION, BOUCLE, CONDITION, LIRE, ECRIRE;
 non terminal ArrayList<String> LIDF;
 non terminal String TYPE, TYPE_RES, STATUT; 
@@ -198,12 +199,12 @@ TYPE		::=	ENTIER:e
 			:}
 			;
 
-DECL_CONST	::=	STATUT:s IDF:i DEBUT LINSTRUCTION:li FIN
+DECL_CONST	::=	STATUT:s IDF:i PARAMETRES DEBUT LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
 			:}
 		|
-			STATUT:s IDF:i DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
+			STATUT:s IDF:i PARAMETRES DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
 			:}
@@ -248,12 +249,12 @@ DECL_VAR	::=	TYPE IDF POINTVIRGULE
 			:}
 			;
 
-DECL_FONCTION	::=	STATUT:s TYPE_RES IDF:i DEBUT LINSTRUCTION:li FIN
+DECL_FONCTION	::=	STATUT:s TYPE IDF:i PARAMETRES DEBUT LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
 			:}
 		|
-			STATUT:s TYPE_RES IDF:i DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
+			STATUT:s TYPE IDF:i PARAMETRES DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
 			:}
@@ -279,6 +280,38 @@ STATUT		::=	PUBLIQUE:p
 			   RESULT = p;
 			:}
 			;
+
+PARAMETRES	::=	PAROUV PARFER
+			{:
+			   
+			:}
+		/*|
+			PAROUV TYPE IDF LTYPE PARFER
+			{:
+			   
+			:}*/
+			;
+
+/*LTYPE  		::=	LTYPE:lt POINTVIRGULE TYPE:t IDF:i
+			{:
+
+			   // A IMPLEMENTER
+		   	   //((BlocDInstructions)lt).ajouter(v);
+
+
+		  	   RESULT = lt;
+			:}
+		|
+			POINTVIRGULE TYPE:t IDF:i
+			{: 
+			   ArbreAbstrait lt = new BlocDInstructions();
+		   	   //((BlocDInstructions)lt).ajouter(v);
+
+			   //A IMPLEMENTER
+
+		           RESULT = lt;
+			:}
+			;*/
 
 INSTRUCTION	::=	AFFECT:a
 			{:
@@ -343,19 +376,19 @@ BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION
 CONDITION	::=	SI EXPR ALORS FSI
 			{:
 			   //plic2
-			   System.out.println("vide");
+			   
 			:}
 		|	
 			SI EXPR ALORS LINSTRUCTION FSI
 			{:
 			   //plic2
-				System.out.println("vide");
+				
 			:}
 		|  	
 			SI EXPR ALORS SINON LINSTRUCTION FSI
 			{:
 			   //plic2
-				System.out.println("vide");
+				
 			:}
 		|  	
 			SI EXPR:e ALORS LINSTRUCTION:li1 SINON LINSTRUCTION:li2 FSI
