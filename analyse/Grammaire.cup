@@ -229,14 +229,14 @@ INSTRUCTION	::=	AFFECT:a
 			   RESULT = a; 
 			:}
 		|	
-			BOUCLE
+			BOUCLE :b
 			{:
-			   //plic2
+			   RESULT = b;
 			:}
 		|	
-			CONDITION
+			CONDITION :c
 			{:
-			   //plic2
+			   RESULT c;
 			:}
 		|	
 			LIRE:l
@@ -288,9 +288,9 @@ CONDITION	::=	SI EXPR ALORS FSI
 			   //plic2
 			:}
 		|  	
-			SI EXPR ALORS LINSTRUCTION SINON LINSTRUCTION FSI
+			SI EXPR:e ALORS LINSTRUCTION:a SINON LINSTRUCTION:s FSI
 			{:
-			   //plic2
+			   RESULT = new Condition(e,(BlocDInstructions)a,(BlocDInstructions)s);
 			:}
 			;
 
