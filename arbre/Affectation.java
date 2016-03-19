@@ -18,7 +18,7 @@ public class Affectation extends ArbreAbstrait{
 		StringBuilder sb = new StringBuilder();
 		sb.append("# Affectation de " + gauche + "\n");
 		sb.append(droite.toMips());
-		int decalage = TDS.getInstance().identifier(new EntreeVar(gauche)).getDep();
+		int decalage = TDS.getInstance().identifier(new EntreeVar(gauche)).getDeplacement();
 		sb.append("sw $v0, " + decalage + "($s7)\n\n");
 		return sb.toString();	
 	}

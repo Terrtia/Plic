@@ -2,18 +2,30 @@ package plic.tds.symboles;
 
 public abstract class Symbole {
 
-	protected String type;
 	protected String statut;
-	protected int dep;
+	protected int numeroBloc;
 	
-	@Override
-	public String toString() {
-		return "Symbole [type=" + type + ", statut=" + statut + ", dep=" + dep
-				+ "]";
+	protected String type;
+	
+	protected int deplacement;
+	
+	public Symbole(String statut, int numeroBloc, String type, int deplacement) {
+		this.statut = statut;
+		this.numeroBloc = numeroBloc;
+		this.type = type;
+		this.deplacement = deplacement;
+	}
+
+	public int getDeplacement() {
+		return deplacement;
+	}
+
+	public String getType() {
+		return type;
 	}
 	
 	public void setDep(int d) {
-		dep = d;
+		deplacement = d;
 	}
 	
 	public void setType(String t) {
@@ -23,21 +35,6 @@ public abstract class Symbole {
 	public void setStatut(String s) {
 		statut = s;
 	}
-
-	public int getDep() {
-		// TODO Auto-generated method stub
-		return dep;
-	}
-
-	public String getType() {
-		// TODO Auto-generated method stub
-		return type;
-	}
 	
-	/*public Symbole(String t, String s, int d) {
-		type = t;
-		statut = s;
-		dep = d;
-	}*/
 	
 }

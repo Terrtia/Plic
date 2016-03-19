@@ -1,24 +1,22 @@
 package plic.arbre;
 
+import plic.VariablesGlobales;
 import plic.tds.TDS;
 import plic.tds.entrees.EntreeVar;
 import plic.tds.symboles.SymboleVar;
 
 public class Declaration extends ArbreAbstrait {
 	
-	public Declaration(String n, String t, String s) {
+	public Declaration(String nom, String type, String statut) {
 		super();
-		TDS.getInstance().ajouter(new EntreeVar(n), new SymboleVar(t, s));
+		TDS.getInstance().ajouter(new EntreeVar(nom), new SymboleVar(statut, VariablesGlobales.getInstance().getNumeroBloc(), type, -1/*deplacement*/));
 	}
 	
-	@Override
 	public String toMips() {
-		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		return sb.toString();
 	}
 
-	@Override
 	public String toString() {
 		return "Declaration []";
 	}

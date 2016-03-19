@@ -2,8 +2,8 @@ package plic.tds.entrees;
 
 public class EntreeClasse extends Entree {
 
-	public EntreeClasse(String nom, int l) {
-		super(nom, l);
+	public EntreeClasse(String nom) {
+		super(nom);
 	}
 
 	

@@ -2,9 +2,9 @@ package plic.tds.symboles;
 
 public class SymboleVar extends Symbole {
 
-	public SymboleVar(String t, String s) {
-		type = t;
-		statut = s;
+	public SymboleVar(String statut, int numeroBloc, String type, int deplacement) {
+		super(statut, numeroBloc, type, deplacement);
 	}
+
 
 }

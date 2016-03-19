@@ -1,7 +1,6 @@
 package plic.tds;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import plic.exceptions.DoubleDeclarationException;
 import plic.exceptions.EntreeNonDeclareeException;

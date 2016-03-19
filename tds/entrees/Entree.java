@@ -6,33 +6,20 @@ public abstract class Entree {
 	protected int ligne;
 	
 	public Entree(String nom) {
-		idf = nom;
-	}
-	
-	public Entree(String nom, int l) {
-		idf = nom;
-		ligne = l;
+		this.idf = nom;
 	}
 
 	public String getIdf() {
 		return idf;
-	}
-
-	public int getLigne() {
-		return ligne;
 	}
 	
 	public void setIdf(String idf) {
 		this.idf = idf;
 	}
 
-	public void setLigne(int ligne) {
-		this.ligne = ligne;
-	}
-
 	@Override
 	public String toString() {
-		return "Entree [idf=" + idf + ", ligne=" + ligne + "]";
+		return "Entree [idf=" + idf + "]";
 	}
 
 	@Override

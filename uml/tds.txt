@@ -1,0 +1,88 @@
+@startuml
+
+title Packages - Class Diagram
+
+
+package Tds <<Node>> {
+  class Tds{
+    -boolean analyseSemantique
+  }
+  
+  class DictLocal{
+    -int numeroBloc
+    -int dep
+  }
+  DictLocal --"1 parent" DictLocal
+  
+  Tds --"*" DictLocal
+  Tds --"1 courant" DictLocal
+  
+  package Entrees {
+  
+    abstract class Entree{
+        #String idf
+        #int ligne
+    }
+    
+    class EntreeClasse{
+    
+    }
+  
+    class EntreeFonct{
+    
+    }
+    
+    class EntreeVar{
+    
+    }
+    
+    class EntreeConstructeur{
+    
+    }
+  
+    Entree <|-- EntreeClasse
+    Entree <|-- EntreeFonct
+    Entree <|-- EntreeVar
+    Entree <|-- EntreeConstructeur
+  
+  }
+  
+  package Symboles {
+  
+    abstract class Symbole{
+        #String statut
+        #int numeroBloc
+        #String type
+        #int deplacement
+    }
+    
+    class SymboleClasse{
+    
+    }
+    
+    class SymboleFonct{
+    
+    }
+    
+    class SymboleVar{
+    
+    }
+    
+    class SymboleConstructeur{
+    
+    }
+    
+    Symbole <|-- SymboleClasse
+    Symbole <|-- SymboleFonct
+    Symbole <|-- SymboleVar
+    Symbole <|-- SymboleConstructeur
+    
+    }
+
+    DictLocal --"*" Entree
+    DictLocal --"*" Symbole
+
+}
+
+
+@enduml
