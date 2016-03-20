@@ -16,7 +16,7 @@ public class TDS {
 	
 	private TDS() {
 		ldico = new ArrayList<DictLocal>();
-		dico = new DictLocal(null, 0);
+		//dico = new DictLocal(null, 0); plic 1
 	}
 	
 	public static TDS getInstance() {
@@ -24,7 +24,7 @@ public class TDS {
 	}
 	
 	public int getTailleZoneVar() {
-		return dico.getDep();
+		return dico.getDeplacement();
 	}
 	
 	public void setAnalyseSemantique() {
@@ -54,9 +54,9 @@ public class TDS {
 		
 		if(!this.analyseSemantique){
 			dico = dico.getParent();
-			//!\\ ZM
+			//!\\ Zone Memoire
 		} else {    //analyse Semantique
-			
+			dico = dico.getParent();
 		}
 	}
 

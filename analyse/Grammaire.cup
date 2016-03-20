@@ -1,8 +1,10 @@
 package plic.analyse ;
 
 import java.util.*;
+import plic.VariablesGlobales;
 import plic.arbre.* ;
 import plic.arbre.expression.* ;
+import plic.arbre.blocs.*;
 import plic.tds.*;
 import plic.tds.entrees.*;
 import plic.tds.symboles.*;
@@ -122,11 +124,17 @@ LCLASSE		::=	LCLASSE:lc CLASSE:c
 CLASSE		::=	CLASS IDF FIN
 			{:
 		   	   //la classe est vide (optimisation en ne faisant qu'une entree/sortie de bloc ?)
+			   TDS.getInstance().entrerBloc();
+			   TDS.getInstance().sortirBloc();
 			:}
 		|	
 			CLASS IDF LDECLARATION:ld FIN
 			{:
-		   	   RESULT = ld;
+			   TDS.getInstance().entrerBloc();
+			   Classe classe = new Classe((BlocDInstructions)ld);
+			   TDS.getInstance().sortirBloc();
+			   RESULT = classe;				// BUG ?????????
+		   	   //RESULT = ld;
 			:}
 			;
 
@@ -202,11 +210,21 @@ TYPE		::=	ENTIER:e
 DECL_CONST	::=	STATUT:s IDF:i PARAMETRES DEBUT LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
+			   TDS.getInstance().entrerBloc();
+			   int numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
+			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, null, (BlocDInstructions)li );
+			   TDS.getInstance().sortirBloc();
+			   RESULT = constructeur;				// BUG ?????????
 			:}
 		|
 			STATUT:s IDF:i PARAMETRES DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
+			   TDS.getInstance().entrerBloc();
+			   int numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
+			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, (BlocDInstructions)lv, (BlocDInstructions)li );
+			   TDS.getInstance().sortirBloc();
+			   RESULT = constructeur;				// BUG ?????????
 			:}
 			;
 
@@ -362,18 +380,18 @@ ACCES		::=	IDF:i
 			:}
 			;
 
-BOUCLE		::=	POUR PAROUV IDF:i EGAL EXPR:e POINTVIRGULE EXPR:e2 POINTVIRGULE INSTRUCTION:i PARFER DEBUT LINSTRUCTION:li FIN
+BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION PARFER DEBUT LINSTRUCTION FIN
 			{:
-			   BlocDInstructions bloc = new BlocDinstructions();
+			   /*BlocDInstructions bloc = new BlocDinstructions();
 			   bloc.add(new Affectation(e,i);
-			   li.add(i);
+			   li.add(i);                                                 A REFAIRE
 			   bloc.add(new Boucle(e2,li);
-			   
+			   */
 			:}
 		|	
 			TANTQUE EXPR:e REPETER LINSTRUCTION:l FINTANTQUE
 			{:
-			   RESULT = new Boucle(e,l);
+			   RESULT = new Boucle(e,(BlocDInstructions)l);
 			:}
 			;
 

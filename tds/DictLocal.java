@@ -13,13 +13,13 @@ public class DictLocal {
 	
 	private DictLocal parent;
 	private int numeroBloc;
-	private int dep;
+	private int deplacement;
 	
 	public DictLocal(DictLocal p, int bloc) {
 		dico = new HashMap<Entree, Symbole>();
 		parent = p;
 		numeroBloc = bloc;
-		dep = 0;
+		deplacement = 0;
 	}
 
 	public DictLocal getParent() {
@@ -30,17 +30,17 @@ public class DictLocal {
 		return numeroBloc;
 	}
 	
-	public int getDep() {
-		return dep;
+	public int getDeplacement() {
+		return deplacement;
 	}
 
 	public void ajouter(Entree e, Symbole s) {
 		if(dico.containsKey(e)){
 			throw new DoubleDeclarationException(e.getIdf());
 		} else {
-			s.setDep(dep);
+			s.setDeplacement(deplacement);
 			dico.put(e, s);	
-			dep += 4; 
+			deplacement += 4; 
 		}
 		
 	}
