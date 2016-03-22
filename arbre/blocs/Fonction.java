@@ -3,7 +3,8 @@ package plic.arbre.blocs;
 
 public class Fonction extends Bloc {
 
-	public Fonction() {
+	public Fonction(int ligne) {
+		super(ligne);
 	}
 
 	public String toMips() {

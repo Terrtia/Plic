@@ -10,8 +10,8 @@ import plic.arbre.ArbreAbstrait;
 
 public class ConstanteEntiere extends Constante {
     
-    public ConstanteEntiere(String texte) {
-        super(texte) ;
+    public ConstanteEntiere(String texte,int ligne) {
+        super(texte,ligne) ;
         type = "entier";
     }
 

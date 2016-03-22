@@ -8,8 +8,8 @@ public class Affectation extends ArbreAbstrait{
 	private Expression droite;
 	private String gauche;
 	
-	public Affectation(Expression droite,String gauche){
-		super();
+	public Affectation(Expression droite,String gauche,int ligne){
+		super(ligne);
 		this.droite = droite;
 		this.gauche = gauche;
 	}

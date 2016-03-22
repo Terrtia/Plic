@@ -8,7 +8,8 @@ public class Condition extends ArbreAbstrait {
 	private BlocDInstructions alors;
 	private BlocDInstructions sinon;
 	
-	public Condition(Expression condition,BlocDInstructions alors,BlocDInstructions sinon){
+	public Condition(Expression condition,BlocDInstructions alors,BlocDInstructions sinon,int ligne){
+		super(ligne);
 		this.condition = condition;
 		this.alors = alors;
 		this.sinon = sinon;

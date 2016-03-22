@@ -8,8 +8,8 @@ package plic.arbre.expression;
 
 public abstract class BinaireLogique extends Binaire {
 
-    protected BinaireLogique(Expression gauche, Expression droite) {
-        super(gauche, droite) ;
+    protected BinaireLogique(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne) ;
         type = "boolean";
     }
     

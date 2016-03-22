@@ -11,7 +11,8 @@ public class Instanciation extends Expression {
 	private Acces acces;
 	private int numeroBloc;
 
-	public Instanciation(String idf, Acces acces) {
+	public Instanciation(String idf, Acces acces, int ligne) {
+		super(ligne);
 		this.idf = idf;
 		this.acces = acces;
 		this.numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();

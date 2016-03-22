@@ -14,10 +14,12 @@ public class Classe extends Bloc {
 	
 	private int numeroBloc;
 
-	public Classe(String idf, BlocDInstructions ld) {
+	public Classe(String idf, BlocDInstructions ld, int ligne) {
+		super(ligne);
 		this.idf = idf;
 		this.ld = ld;
 		this.numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
+
 	}
 
 	public String toMips() {

@@ -35,7 +35,7 @@ public class Plic {
             
             /* Gestion de la classe Racine (main) */
             TDS.getInstance().ajouter(new EntreeVar("main"), new SymboleVar("publique", 0, racine));
-        	this.main = new Instanciation("main", new Acces(racine));
+        	this.main = new Instanciation("main", new Acces(racine, -1), -1);
         	
         	System.out.println(main.toString());
             

@@ -8,7 +8,8 @@ public class Boucle extends ArbreAbstrait{
 	private BlocDInstructions iter;
 	private Expression condition;
 	
-	public Boucle(Expression condition,BlocDInstructions iter){
+	public Boucle(Expression condition,BlocDInstructions iter,int ligne){
+		super(ligne);
 		this.condition = condition;
 		this.iter = iter;
 	}

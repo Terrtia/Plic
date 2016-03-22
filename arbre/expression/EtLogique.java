@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class EtLogique extends BinaireLogique {
 
-    public EtLogique(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public EtLogique(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne);
     }
     
     @Override

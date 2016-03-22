@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class Superieur extends Comparaison {
 
-    public Superieur(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public Superieur(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite, ligne);
     }
 
     @Override

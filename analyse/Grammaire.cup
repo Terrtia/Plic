@@ -131,9 +131,10 @@ CLASSE		::=	CLASS IDF:i FIN
 		|	
 			CLASS IDF:i LDECLARATION:ld FIN
 			{:
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 			   TDS.getInstance().ajouter(new EntreeClasse(i) , new SymboleClasse(VariablesGlobales.getInstance().getNumeroBloc()) );
 			   TDS.getInstance().entrerBloc();
-			   Classe classe = new Classe(i, (BlocDInstructions)ld);
+			   Classe classe = new Classe(i, (BlocDInstructions)ld, ligne);
 			   TDS.getInstance().sortirBloc();
 			   RESULT = classe;				// BUG ?????????
 		   	   //RESULT = ld;
@@ -150,7 +151,7 @@ LDECLARATION	::=	LDECLARATION:ld DECLARATION:d
 			{: 
 			   ArbreAbstrait ld = new BlocDInstructions();
 		   	   ((BlocDInstructions)ld).ajouter(d);
-		       RESULT = ld;
+			   RESULT = ld;
 			:}
 			;
 
@@ -186,9 +187,10 @@ LIDF ::= IDF:i
 
 DECL_CHAMP ::= STATUT:s TYPE:t LIDF:n POINTVIRGULE
 				{: 
+				int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 				BlocDInstructions l = new BlocDInstructions();
 				for(String nidf : n) {
-					l.ajouter(new Declaration(nidf,t,s));
+					l.ajouter(new Declaration(nidf,t,s,ligne));
 				}
 				RESULT = l; :}
 ;
@@ -212,9 +214,10 @@ TYPE		::=	ENTIER:e
 DECL_CONST	::=	STATUT:s IDF:i PARAMETRES DEBUT LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 			   TDS.getInstance().entrerBloc();
 			   int numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
-			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, null, (BlocDInstructions)li );
+			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, null, (BlocDInstructions)li,ligne );
 			   TDS.getInstance().sortirBloc();
 			   RESULT = constructeur;				// BUG ?????????
 			:}
@@ -222,9 +225,10 @@ DECL_CONST	::=	STATUT:s IDF:i PARAMETRES DEBUT LINSTRUCTION:li FIN
 			STATUT:s IDF:i PARAMETRES DEBUT LDECL_VAR:lv LINSTRUCTION:li FIN
 			{:  
 			   // a implementer
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
 			   TDS.getInstance().entrerBloc();
 			   int numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
-			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, (BlocDInstructions)lv, (BlocDInstructions)li );
+			   Constructeur constructeur = new Constructeur( s, i, numeroBloc, (BlocDInstructions)lv, (BlocDInstructions)li,ligne );
 			   TDS.getInstance().sortirBloc();
 			   RESULT = constructeur;				// BUG ?????????
 			:}
@@ -305,33 +309,7 @@ PARAMETRES	::=	PAROUV PARFER
 			{:
 			   
 			:}
-		/*|
-			PAROUV TYPE IDF LTYPE PARFER
-			{:
-			   
-			:}*/
 			;
-
-/*LTYPE  		::=	LTYPE:lt POINTVIRGULE TYPE:t IDF:i
-			{:
-
-			   // A IMPLEMENTER
-		   	   //((BlocDInstructions)lt).ajouter(v);
-
-
-		  	   RESULT = lt;
-			:}
-		|
-			POINTVIRGULE TYPE:t IDF:i
-			{: 
-			   ArbreAbstrait lt = new BlocDInstructions();
-		   	   //((BlocDInstructions)lt).ajouter(v);
-
-			   //A IMPLEMENTER
-
-		           RESULT = lt;
-			:}
-			;*/
 
 INSTRUCTION	::=	AFFECT:a
 			{:
@@ -366,34 +344,41 @@ INSTRUCTION	::=	AFFECT:a
 
 AFFECT		::=	ACCES:a EGAL EXPR:e POINTVIRGULE
 			{:
-			   RESULT = new Affectation(e, a.getIdf() );
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new Affectation(e, a.getIdf(),ligne );
 			:}
 			;
 
 INSTANCIATION	::=	ACCES:a EGAL NOUVEAU IDF:i PAROUV PARFER
 			{:
-			   RESULT = new Instanciation(i, a);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new Instanciation(i, a, ligne);
 			:}
 			;
 
 ACCES		::=	IDF:i
 			{:
-			   RESULT = new Acces(i);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new Acces(i,ligne);
 			:}
 			;
 
-BOUCLE		::=	POUR PAROUV IDF EGAL EXPR POINTVIRGULE EXPR POINTVIRGULE INSTRUCTION PARFER DEBUT LINSTRUCTION FIN
+BOUCLE		::=	POUR PAROUV IDF:i EGAL EXPR:e POINTVIRGULE EXPR:e2 POINTVIRGULE INSTRUCTION:i2 PARFER DEBUT LINSTRUCTION:li FIN
 			{:
-			   /*BlocDInstructions bloc = new BlocDinstructions();
-			   bloc.add(new Affectation(e,i);
-			   li.add(i);                                                 A REFAIRE
-			   bloc.add(new Boucle(e2,li);
-			   */
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   BlocDInstructions bloc = new BlocDInstructions();
+			   bloc.ajouter(new Affectation(e,i,ligne));
+			   BlocDInstructions iter = new BlocDInstructions();
+			   iter.ajouter(li);
+			   iter.ajouter(i2);                                             
+			   bloc.ajouter(new Boucle(e2,iter,ligne));
+			   RESULT = bloc ;
 			:}
 		|	
 			TANTQUE EXPR:e REPETER LINSTRUCTION:l FINTANTQUE
 			{:
-			   RESULT = new Boucle(e,(BlocDInstructions)l);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new Boucle(e,(BlocDInstructions)l,ligne);
 			:}
 			;
 
@@ -404,19 +389,22 @@ CONDITION	::=	SI EXPR ALORS FSI
 		|	
 			SI EXPR:e ALORS LINSTRUCTION:l FSI
 			{:
-			   Condition c = new Condition(e, (BlocDInstructions)l, null);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   Condition c = new Condition(e, (BlocDInstructions)l, null,ligne);
 			   RESULT = c;
 			:}
 		|  	
 			SI EXPR:e ALORS SINON LINSTRUCTION:li1 FSI
 			{:
-			   Condition c = new Condition(e, null,(BlocDInstructions)li1);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   Condition c = new Condition(e, null,(BlocDInstructions)li1,ligne);
 			   RESULT = c;
 			:}
 		|  	
 			SI EXPR:e ALORS LINSTRUCTION:li1 SINON LINSTRUCTION:li2 FSI
 			{:
-			   Condition c = new Condition(e, (BlocDInstructions)li1, (BlocDInstructions)li2);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   Condition c = new Condition(e, (BlocDInstructions)li1, (BlocDInstructions)li2,ligne);
 			   RESULT = c;
 			:}
 			;
@@ -429,50 +417,87 @@ LIRE		::=	LIR IDF
 
 ECRIRE		::=	ECRIR EXPR:e POINTVIRGULE
 			{:
-			   RESULT = new EcrireExpression(e);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new EcrireExpression(e,ligne);
 			:}
 		|	ECRIR CSTECHAINE:c POINTVIRGULE
 			{: 
-			   RESULT = new EcrireChaine(c);
+			   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+			   RESULT = new EcrireChaine(c,ligne);
 			:}
 			;
 
     
 EXPR    ::=     EXPR:g  PLUS  EXPR:d
-                {: RESULT = new Plus(g, d) ; :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Plus(g, d,ligne) ; 
+		:}
         | 
                 EXPR:g  MOINS  EXPR:d
-                {: RESULT = new Moins(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Moins(g, d,ligne); 
+		:}
         |                
                 EXPR:g  MULT  EXPR:d
-                {: RESULT = new Mult(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Mult(g, d,ligne); 
+		:}
         |                
                 EXPR:g  DIV  EXPR:d
-                {: RESULT = new Div(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Div(g, d,ligne); :}
         |       
                 EXPR:g  INF  EXPR:d
-                {: RESULT = new Inferieur(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Inferieur(g, d,ligne); 
+		:}
         |       
                 EXPR:g  SUP  EXPR:d
-                {: RESULT = new Superieur(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Superieur(g, d,ligne); 
+		:}
         |              
                 EXPR:g  EGALEGAL  EXPR:d
-                {: RESULT = new Egal(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Egal(g, d,ligne); 
+		:}
         |       
                 EXPR:g  DIFF  EXPR:d
-                {: RESULT = new Different(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new Different(g, d,ligne); 
+		:}
         |                      
                 MOINS  EXPR:e  
-                {: RESULT = new MoinsUnaire(e); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new MoinsUnaire(e,ligne); 
+		:}
         |      
                 EXPR:g  ET  EXPR:d
-                {: RESULT = new EtLogique(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new EtLogique(g, d,ligne); 
+		:}
         |      
                 EXPR:g  OU  EXPR:d
-                {: RESULT = new OuLogique(g, d); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new OuLogique(g, d,ligne); 
+		:}
         |      
                 NON EXPR:e
-                {: RESULT = new NonLogique(e); :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new NonLogique(e,ligne);
+		:}
         |		
         	ACCES:a
         	{: RESULT = a; :}
@@ -485,10 +510,16 @@ EXPR    ::=     EXPR:g  PLUS  EXPR:d
                 ;
 
 CSTE    ::=     CSTEINT:e 
-                {: RESULT = new ConstanteEntiere(e) ; :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new ConstanteEntiere(e,ligne) ; 
+		:}
         |       
 		CSTEBOOL:e 
-                {: RESULT = new ConstanteBool(e) ; :}
+                {:
+		   int ligne = ((java_cup.runtime.Symbol)CUP$AnalyseurSyntaxique$stack.peek()).left;
+                   RESULT = new ConstanteBool(e,ligne) ; 
+		:}
                 ;
 
 
