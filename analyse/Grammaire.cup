@@ -121,17 +121,19 @@ LCLASSE		::=	LCLASSE:lc CLASSE:c
 			:}
 			;
 
-CLASSE		::=	CLASS IDF FIN
+CLASSE		::=	CLASS IDF:i FIN
 			{:
 		   	   //la classe est vide (optimisation en ne faisant qu'une entree/sortie de bloc ?)
+			   TDS.getInstance().ajouter(new EntreeClasse(i) , new SymboleClasse(VariablesGlobales.getInstance().getNumeroBloc()) );
 			   TDS.getInstance().entrerBloc();
 			   TDS.getInstance().sortirBloc();
 			:}
 		|	
-			CLASS IDF LDECLARATION:ld FIN
+			CLASS IDF:i LDECLARATION:ld FIN
 			{:
+			   TDS.getInstance().ajouter(new EntreeClasse(i) , new SymboleClasse(VariablesGlobales.getInstance().getNumeroBloc()) );
 			   TDS.getInstance().entrerBloc();
-			   Classe classe = new Classe((BlocDInstructions)ld);
+			   Classe classe = new Classe(i, (BlocDInstructions)ld);
 			   TDS.getInstance().sortirBloc();
 			   RESULT = classe;				// BUG ?????????
 		   	   //RESULT = ld;
@@ -368,9 +370,9 @@ AFFECT		::=	ACCES:a EGAL EXPR:e POINTVIRGULE
 			:}
 			;
 
-INSTANCIATION	::=	ACCES EGAL NOUVEAU IDF PAROUV PARFER
+INSTANCIATION	::=	ACCES:a EGAL NOUVEAU IDF:i PAROUV PARFER
 			{:
-			   // a implementer
+			   RESULT = new Instanciation(i, a);
 			:}
 			;
 

@@ -20,18 +20,6 @@ public class Constructeur extends Bloc {
 		this.ListeDInstructions = ListeDInstructions;
 		
 	}
-	
-	public String getStatut() {
-		return statut;
-	}
-	
-	public String getIdf() {
-		return idf;
-	}
-	
-	public int getNumeroBloc() {
-		return numeroBloc;
-	}
 
 	public String toMips() {
 		return null;

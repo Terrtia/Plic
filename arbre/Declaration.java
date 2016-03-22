@@ -9,7 +9,7 @@ public class Declaration extends ArbreAbstrait {
 	
 	public Declaration(String nom, String type, String statut) {
 		super();
-		TDS.getInstance().ajouter(new EntreeVar(nom), new SymboleVar(statut, VariablesGlobales.getInstance().getNumeroBloc(), type, -1/*deplacement*/));
+		TDS.getInstance().ajouter(new EntreeVar(nom), new SymboleVar(statut, VariablesGlobales.getInstance().getNumeroBloc(), type));
 	}
 	
 	public String toMips() {

@@ -9,8 +9,12 @@ import java.util.logging.Logger;
 import plic.analyse.AnalyseurLexical;
 import plic.analyse.AnalyseurSyntaxique;
 import plic.arbre.ArbreAbstrait;
+import plic.arbre.expression.Acces;
+import plic.arbre.expression.Instanciation;
 import plic.exceptions.AnalyseException;
 import plic.tds.TDS;
+import plic.tds.entrees.EntreeVar;
+import plic.tds.symboles.SymboleVar;
 
 /**
  * 24 mars 2015 
@@ -19,17 +23,29 @@ import plic.tds.TDS;
  */
 
 public class Plic {
+	
+	private Instanciation main;
     
-    public Plic(String fichier) {
+    public Plic(String fichier, String racine) {
         try {
+        	
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(fichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
             //System.err.println("expression stockée dans l'arbre : \n ---------\n" + arbre.toString());
+            
+            /* Gestion de la classe Racine (main) */
+            TDS.getInstance().ajouter(new EntreeVar("main"), new SymboleVar("publique", 0, racine));
+        	this.main = new Instanciation("main", new Acces(racine));
+        	
+        	System.out.println(main.toString());
             
             String nom;
             nom = fichier.substring(0, fichier.length()-5);
             
             nom = nom + ".mips";
+            
+            /* Gestion de la classe Racine (main) */
+            
             
             FileOutputStream fos = new FileOutputStream(nom);
             String mips = data() + entete() + arbre.toMips() + fin();
@@ -67,9 +83,13 @@ public class Plic {
     	StringBuilder s = new StringBuilder();
     	s.append(".text\n");
     	s.append("main :\n\n");
-    	s.append("# Declarations\n");
 		s.append("move $s7,$sp\n");
-		s.append("addi $sp,$sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n");
+		s.append("addi $sp,$sp,-" + TDS.getInstance().getTailleZoneVar() + "\n\n"); //inutile desormais
+		
+		/* Gestion de la classe Racine (main) */
+    	s.append("# gestion de la classe racine\n");
+		s.append(this.main.toMips());
+		
     	return s.toString();
     }
     
@@ -83,12 +103,12 @@ public class Plic {
     }
 
     public static void main(String[] args) {
-        if (args.length != 1) {
+        if (args.length != 2) {
             System.err.println("Nombre incorrect d'arguments") ;
-            System.err.println("\tjava -jar plic.jar <fichierSource.plic>") ;
+            System.err.println("\tjava -jar plic.jar <fichierSource.plic> <Classe racine>") ;
             System.exit(1) ;
         }
-        new Plic(args[0]) ;
+        new Plic(args[0], args[1]) ;
     }
     
 }

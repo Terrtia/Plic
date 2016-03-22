@@ -8,12 +8,14 @@ public class VariablesGlobales {
 	
 	private int numeroBloc;
 	private ArrayList<String> dataString;
+	private int etiquette;
 	private int si;
 	private StringBuilder condition;
 	private int boucle;
 	
 	private VariablesGlobales() {
-		numeroBloc = -1;
+		numeroBloc = 0;
+		etiquette = 0;
 		dataString = new ArrayList<>();
 		si = 0;
 		boucle = 0;
@@ -29,6 +31,14 @@ public class VariablesGlobales {
 	
 	public void IncrNumeroBloc() {
 		this.numeroBloc++;
+	}
+	
+	public int getEtiquette() {
+		return this.etiquette;
+	}
+	
+	public void IncrEtiquette() {
+		this.etiquette++;
 	}
 	
 	public void addData(String str){

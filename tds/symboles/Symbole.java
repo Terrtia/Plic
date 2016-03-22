@@ -1,21 +1,30 @@
 package plic.tds.symboles;
 
+import plic.VariablesGlobales;
+
 public abstract class Symbole {
 
 	protected String statut;
 	protected int numeroBloc;
 	
+	protected String etiquette;
 	protected String type;
 	
 	protected int deplacement;
 	
-	public Symbole(String statut, int numeroBloc, String type, int deplacement) {
+	public Symbole(String statut, int numeroBloc, String type) {
 		this.statut = statut;
 		this.numeroBloc = numeroBloc;
+		int numero = VariablesGlobales.getInstance().getEtiquette();
+		this.etiquette = Integer.toString(numero);
+		VariablesGlobales.getInstance().IncrEtiquette();
 		this.type = type;
-		this.deplacement = deplacement;
 	}
 
+	public String getEtiquette() {
+		return etiquette;
+	}
+	
 	public int getDeplacement() {
 		return deplacement;
 	}

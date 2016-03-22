@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import plic.VariablesGlobales;
 import plic.tds.entrees.Entree;
 import plic.tds.symboles.Symbole;
+import plic.tds.symboles.SymboleConstructeur;
 
 public class TDS {
 
@@ -14,9 +15,14 @@ public class TDS {
 	private DictLocal dico;
 	private boolean analyseSemantique;
 	
+	private DictLocal constructeur;
+	
 	private TDS() {
 		ldico = new ArrayList<DictLocal>();
-		//dico = new DictLocal(null, 0); plic 1
+		constructeur = new DictLocal(null, -1);
+		
+		int numeroBloc = VariablesGlobales.getInstance().getNumeroBloc();
+		dico = new DictLocal(null, numeroBloc);
 	}
 	
 	public static TDS getInstance() {
@@ -38,6 +44,14 @@ public class TDS {
 	
 	public Symbole identifier(Entree e) {
 		return dico.identifier(e);
+	}
+	
+	public void ajouterConstructeur(Entree e, SymboleConstructeur s) {
+		constructeur.ajouter(e, s);
+	}
+	
+	public Symbole identifierConstructeur(Entree e) {
+		return constructeur.identifier(e);
 	}
 	
 	public void entrerBloc() {

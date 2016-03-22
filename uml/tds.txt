@@ -52,6 +52,7 @@ package Tds <<Node>> {
     abstract class Symbole{
         #String statut
         #int numeroBloc
+	#String etiquette
         #String type
         #int deplacement
     }
