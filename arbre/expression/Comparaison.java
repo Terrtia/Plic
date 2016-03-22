@@ -8,8 +8,8 @@ package plic.arbre.expression;
 
 public abstract class Comparaison extends Binaire {
      
-    protected Comparaison(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    protected Comparaison(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne);
         type = "boolean";
     }
     

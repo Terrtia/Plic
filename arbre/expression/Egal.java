@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class Egal extends Comparaison {
 
-    public Egal(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public Egal(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne);
     }
     
     @Override

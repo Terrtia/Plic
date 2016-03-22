@@ -9,8 +9,8 @@ package plic.arbre.expression;
 
 public class ConstanteBool extends Constante {
     
-    public ConstanteBool(String texte) {
-        super(texte) ;
+    public ConstanteBool(String texte,int ligne) {
+        super(texte,ligne) ;
         type = "boolean";
     }
 

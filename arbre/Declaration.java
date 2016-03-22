@@ -7,8 +7,8 @@ import plic.tds.symboles.SymboleVar;
 
 public class Declaration extends ArbreAbstrait {
 	
-	public Declaration(String nom, String type, String statut) {
-		super();
+	public Declaration(String nom, String type, String statut,int ligne) {
+		super(ligne);
 		TDS.getInstance().ajouter(new EntreeVar(nom), new SymboleVar(statut, VariablesGlobales.getInstance().getNumeroBloc(), type, -1/*deplacement*/));
 	}
 	

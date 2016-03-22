@@ -10,8 +10,8 @@ import plic.arbre.ArbreAbstrait;
 
 public class Mult extends BinaireArithmetique {
 
-    public Mult(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public Mult(Expression gauche, Expression droite,int ligne ) {
+        super(gauche, droite,ligne);
     }
   
     @Override

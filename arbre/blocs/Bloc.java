@@ -4,6 +4,10 @@ import plic.arbre.ArbreAbstrait;
 
 public abstract class Bloc extends ArbreAbstrait {
 
+	protected Bloc(int nbLigne) {
+		super(nbLigne);
+	}
+
 	public StringBuilder EntrerBlocToMips() {
 		StringBuilder s = new StringBuilder();
 		

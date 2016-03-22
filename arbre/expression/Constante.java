@@ -10,7 +10,8 @@ public abstract class Constante extends Expression {
 
     protected String cste ;
     
-    protected Constante(String texte) {
+    protected Constante(String texte,int ligne) {
+    	super(ligne);
         cste = texte ;
     }
 

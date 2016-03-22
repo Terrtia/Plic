@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class MoinsUnaire extends Unaire {
     
-    public MoinsUnaire(Expression expr) {
-        super(expr);
+    public MoinsUnaire(Expression expr,int ligne) {
+        super(expr,ligne);
         type = "entier";
     }
 

@@ -7,7 +7,8 @@ public class Acces extends Expression {
 
 	private String idf;
 	
-	public Acces(String i) {
+	public Acces(String i,int ligne) {
+		super(ligne);
 		idf = i;
 		type =  TDS.getInstance().identifier(new EntreeVar(idf)).getType();
 	}

@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class OuLogique extends BinaireLogique {
 
-    public OuLogique(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public OuLogique(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite, ligne);
     }
     
     @Override

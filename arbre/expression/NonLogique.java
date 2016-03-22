@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class NonLogique extends Unaire {
     
-    public NonLogique(Expression expr) {
-        super(expr);
+    public NonLogique(Expression expr,int ligne) {
+        super(expr,ligne);
         type ="boolean";
     }
 

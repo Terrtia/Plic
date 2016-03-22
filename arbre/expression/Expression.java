@@ -11,8 +11,8 @@ import plic.arbre.ArbreAbstrait;
 public abstract class Expression extends ArbreAbstrait {
     protected String type;
 	
-    protected Expression() {
-        super() ;
+    protected Expression(int ligne) {
+        super(ligne) ;
     }
     
     public String getType(){

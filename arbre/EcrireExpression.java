@@ -5,7 +5,8 @@ import plic.arbre.expression.Expression;
 public class EcrireExpression extends ArbreAbstrait{
 	private Expression message ;
 	
-	public EcrireExpression(Expression mess){
+	public EcrireExpression(Expression mess,int ligne){
+		super(ligne);
 		message = mess;
 	}
 	

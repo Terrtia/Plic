@@ -12,7 +12,8 @@ public class Constructeur extends Bloc {
 	private BlocDInstructions ListeDeclarations; //!\\ peut etre nulle
 	private BlocDInstructions ListeDInstructions;
 
-	public Constructeur(String statut, String idf, int numeroBloc, BlocDInstructions ListeDeclarations, BlocDInstructions ListeDInstructions) {
+	public Constructeur(String statut, String idf, int numeroBloc, BlocDInstructions ListeDeclarations, BlocDInstructions ListeDInstructions,int ligne) {
+		super(ligne);
 		this.statut = statut;
 		this.idf = idf;
 		this.numeroBloc = numeroBloc;

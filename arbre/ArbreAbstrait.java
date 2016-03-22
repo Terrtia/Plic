@@ -7,8 +7,9 @@ package plic.arbre;
  */
 
 public abstract class ArbreAbstrait {
-    
-    protected ArbreAbstrait() {
+    private int ligne;
+    protected ArbreAbstrait(int nbLigne) {
+    	ligne = nbLigne;
     }
     
     public abstract String toMips();

@@ -10,8 +10,8 @@ public abstract class Unaire extends Expression {
     
     protected Expression expression ;
 
-    protected Unaire(Expression expr) {
-        super();
+    protected Unaire(Expression expr,int ligne) {
+    	super(ligne);
         expression = expr ;
     }
     

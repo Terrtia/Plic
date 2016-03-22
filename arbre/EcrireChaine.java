@@ -7,7 +7,8 @@ public class EcrireChaine extends ArbreAbstrait {
 	private String message ;
 	private int index;
 		
-	public EcrireChaine(String mess){
+	public EcrireChaine(String mess,int ligne){
+		super(ligne);
 		message = mess;
 		VariablesGlobales.getInstance().addData(mess);
 	}

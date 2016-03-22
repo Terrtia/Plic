@@ -6,7 +6,8 @@ import plic.tds.entrees.EntreeVar;
 public class EcrireVar extends ArbreAbstrait{
 	private String var; 
 
-	public EcrireVar(String var){
+	public EcrireVar(String var,int ligne){
+		super(ligne);
 		this.var = var;
 	}
 	

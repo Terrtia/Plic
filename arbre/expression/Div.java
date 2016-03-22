@@ -11,8 +11,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public class Div extends BinaireArithmetique {
 
-    public Div(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    public Div(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne);
     }
 
     @Override

@@ -11,8 +11,8 @@ public abstract class Binaire extends Expression {
     protected Expression gauche ;
     protected Expression droite ;
 
-    protected Binaire(Expression gauche, Expression droite) {
-        super();
+    protected Binaire(Expression gauche, Expression droite,int ligne) {
+        super(ligne);
         this.gauche = gauche;
         this.droite = droite;
     }

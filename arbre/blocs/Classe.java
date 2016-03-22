@@ -5,10 +5,12 @@ import plic.arbre.BlocDInstructions;
 
 public class Classe extends Bloc {
 
-	public Classe() {
+	public Classe(int ligne) {
+		super(ligne);
 	}
 
-	public Classe(BlocDInstructions ld) {
+	public Classe(BlocDInstructions ld,int ligne) {
+		super(ligne);
 	}
 
 	public String toMips() {

@@ -16,7 +16,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     
     public BlocDInstructions() {
-        super();
+        super(-1);
         lesArbres = new ArrayList<ArbreAbstrait>();
     }
     

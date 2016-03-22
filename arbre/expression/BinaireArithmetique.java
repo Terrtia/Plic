@@ -10,8 +10,8 @@ import plic.exceptions.AnalyseSemantiqueException;
 
 public abstract class BinaireArithmetique extends Binaire {
 
-    protected BinaireArithmetique(Expression gauche, Expression droite) {
-        super(gauche, droite);
+    protected BinaireArithmetique(Expression gauche, Expression droite,int ligne) {
+        super(gauche, droite,ligne);
         type = "entier";
     }  
     
